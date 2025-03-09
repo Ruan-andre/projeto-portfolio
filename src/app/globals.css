@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --special-color: #8cf9ff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #15161a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .special-color {
+    color: var(--special-color);
+  }
+
+  .custom-shadow {
+    box-shadow: 0 0 50px var(--special-color);
+  }
+}
+
+@layer utilities {
+  .hover\:custom-shadow:hover {
+    box-shadow: 0 0 50px var(--special-color);
+    transition: 0.5s;
+  }
+}
