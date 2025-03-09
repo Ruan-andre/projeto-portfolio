@@ -27,12 +27,15 @@ export default function Home() {
         className="container max-w-fit mx-auto grid grid-cols-[60%_40%] items-center gap-[9rem] m-auto pt-[7rem]"
       >
         <div className="flex flex-col gap-y-10">
-          <h1 className="text-7xl text-[#ffffff]">
+          <h1 className="text-7xl">
             Olá, eu sou{" "}
             <span className="special-color tracking-widest">André Ruan!</span>
           </h1>
-          <h2 className="text-5xl text-[#ffffff] text-animation">
-            Sou <span className="special-color tracking-widest"></span>
+          <h2 className="text-5xl text-animation">
+            Sou{" "}
+            <span className="special-color tracking-widest">
+              Desenvolvedor Full Stack
+            </span>
           </h2>
           <p className="max-w-5xl text-[2.4rem] text-[#a1a2a3] tracking-widest">
             Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na
