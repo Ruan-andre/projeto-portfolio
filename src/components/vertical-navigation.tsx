@@ -10,7 +10,7 @@ const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
           const href = (item as any).props.href || "#";
           return (
             <li
-              className="hover:scale-125 transition-transform opacity-45 "
+              className="hover:scale-125 hover:opacity-100 transition-transform opacity-45"
               key={index}
             >
               <a href={href}>{item}</a>
