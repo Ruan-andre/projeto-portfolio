@@ -25,7 +25,7 @@ const Card = (data: CardData) => {
           </div>
         )}
         <div>
-          <h3 className="text-[3rem] font-light">{data.title}</h3>
+          <h3 className="text-[3rem] font-light opacity-80">{data.title}</h3>
           <p className="text-[1.5rem] font-thin">{data.aboutCard}</p>
         </div>
       </div>

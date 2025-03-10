@@ -38,7 +38,12 @@ export default function Home() {
       <header>
         <VerticalNavigation>
           <Icon icon="ic:round-home" width="35" height="35" />
-          <Icon icon="fluent:tabs-16-filled" width="35" height="35" />
+          <Icon
+            href={"#projects"}
+            icon="fluent:tabs-16-filled"
+            width="35"
+            height="35"
+          />
           <Icon icon="fa6-solid:code" width="35" height="35" />
           <Icon icon="uiw:mail" width="35" height="35" />
         </VerticalNavigation>
