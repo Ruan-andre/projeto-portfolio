@@ -1,6 +1,1 @@
-export {
-  IconHomeFilled,
-  IconSquaresFilled,
-  IconCodeCircle2Filled,
-  IconMailFilled
-} from "@tabler/icons-react";
+export { Icon } from "@iconify/react";
