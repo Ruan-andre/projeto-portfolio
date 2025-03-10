@@ -4,6 +4,7 @@
   --background: #ffffff;
   --foreground: black;
   --special-color: #8cf9ff;
+  --color-brown-red: rgba(255, 153, 153, 0.4);
 }
 
 /* @theme inline {
@@ -20,6 +21,12 @@
   }
 }
 
+html,
+body {
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -34,15 +41,53 @@ body {
   .special-color {
     color: var(--special-color);
   }
+  .skills {
+    @apply flex flex-wrap items-center justify-center gap-x-[2rem] gap-y-[5rem] pt-[5rem];
+  }
 
-  /* .custom-shadow {
-    box-shadow: 0 0 30px var(--special-color);
-  } */
+  .bg-shadow {
+    @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(1,1,1,0.40)];
+  }
+
+  .bg-shadow-brown-red {
+    @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(255,153,153,0.40)];
+  }
+
+  .personalized-title {
+    position: relative;
+    display: inline-block;
+  }
+  .personalized-title::after {
+    z-index: 10;
+    content: attr(data-title);
+    position: absolute;
+    left: 120%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .personalized-title:hover::after {
+    opacity: 1;
+  }
 }
 
 @layer utilities {
   .hover\:custom-shadow:hover {
     box-shadow: 0 0 30px var(--special-color);
+    transition: 0.5s;
+  }
+
+  .hover\:bg-shadow-brown-red:hover {
+    box-shadow: 0 0 30px var(--color-brown-red);
     transition: 0.5s;
   }
 }
