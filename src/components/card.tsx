@@ -3,20 +3,25 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 
 const Card = (data: CardData) => {
-  debugger;
   return (
     <div className="flex flex-col w-[70rem] h-[48rem] gap-y-[1.5rem] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:custom-shadow">
-      <Image
-        className="rounded-[4rem]"
-        width={760}
-        height={480}
-        src={data.imgSrc}
-        alt={data.title}
-      />
+      <div className="w-full h-[80%] rounded-[4rem] overflow-hidden flex items-center justify-center">
+        <Image
+          className="w-full h-full object-cover"
+          width={760}
+          height={480}
+          src={data.imgSrc}
+          alt={data.title}
+        />
+      </div>
       <div className="pl-[5rem] flex  items-center gap-[3rem]">
         {data.icon && (
           <div>
-            <Icon icon={data.icon} width="35" height="35" />
+            <Icon
+              icon={data.icon}
+              width={data?.iconSize || "35"}
+              height={data?.iconSize || "35"}
+            />
           </div>
         )}
         <div>

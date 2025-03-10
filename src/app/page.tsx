@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import GithubData from "@/interfaces/githubData";
 import Card from "@/components/card";
 import game from "../../public/img/game.jpg";
+import engrenagemFundo from "@/../public/img/engrenagem.png";
+import pessoal from "@/../public/img/pessoal.jpg";
 
 export default function Home() {
   const [githubData, setGithubData] = useState<GithubData | null>(null);
@@ -43,9 +45,9 @@ export default function Home() {
       </header>
       <main
         id="presentation"
-        className="container max-w-fit mx-auto grid grid-cols-[60%_40%] items-center gap-[0, 9rem] m-auto pt-[7rem]"
+        className="container max-w-[80%] mx-auto grid grid-cols-[60%_40%] items-center gap-x-[9rem] m-auto pt-[3rem]"
       >
-        <div className="flex flex-col gap-y-10">
+        <div className="flex flex-col gap-y-10 font-semibold pl-[4rem]">
           {githubData && (
             <h1 className="text-7xl">
               Olá, eu sou{" "}
@@ -56,7 +58,7 @@ export default function Home() {
           )}
 
           {githubData?.name && (
-            <h2 className="text-5xl text-animation">
+            <h2 className="text-5xl text-animation pt-[3rem] pb-[3rem]">
               Sou{" "}
               <span className="special-color tracking-widest ">
                 {professionalTitle}
@@ -64,7 +66,7 @@ export default function Home() {
             </h2>
           )}
 
-          <p className="max-w-5xl text-[2.4rem] text-[#a1a2a3] tracking-widest">
+          <p className="max-w-5xl text-[2rem] text-[#a1a2a3] ">
             Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na
             área da tecnologia há{" "}
             <span className="special-color opacity-100">
@@ -82,19 +84,38 @@ export default function Home() {
           <Image
             alt="Foto de André Ruan"
             src={githubData?.picture || ""}
-            width={450} // Defina um tamanho fixo proporcional
-            height={450}
+            width={400} // Defina um tamanho fixo proporcional
+            height={400}
             className="object-cover w-full h-full"
           />
         </div>
         <section id="projects" className="col-span-2">
-          <h2 className="text-[4rem]">Projects</h2>
-          <Card
-            imgSrc={game.src}
-            title={"Games"}
-            aboutCard={"Projetos de jogos"}
-            icon="mingcute:game-2-fill"
-          />
+          <h2 className="text-[4rem] pl-[4rem] pb-[4rem] font-semibold">
+            Projetos
+          </h2>
+          <div className="flex gap-[2rem]">
+            <Card
+              imgSrc={engrenagemFundo.src}
+              title={"Utilitários"}
+              aboutCard={"Projetos de softwares utilitários em geral."}
+              icon="arcticons:amaze-utilities"
+              iconSize={50}
+            />
+            <Card
+              imgSrc={game.src}
+              title={"Games"}
+              aboutCard={"Projetos de jogos"}
+              icon="mingcute:game-2-fill"
+              iconSize={50}
+            />
+            <Card
+              imgSrc={pessoal.src}
+              title={"Pessoais"}
+              aboutCard={"Projetos pessoais"}
+              icon="ion:person"
+              iconSize={50}
+            />
+          </div>
         </section>
       </main>
     </>
