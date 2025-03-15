@@ -23,7 +23,7 @@
 
 html,
 body {
-  height: 100vh;
+  min-height: 100vh;
   scroll-behavior: smooth;
 }
 
@@ -45,6 +45,19 @@ body {
     @apply flex flex-wrap items-center justify-center gap-x-[2rem] gap-y-[5rem] pt-[5rem];
   }
 
+  .skill-card {
+    @apply w-[15rem] h-[20rem] flex flex-col items-center justify-center gap-[3rem] p-[2rem] bg-gray-900 border-gray-900 rounded-[2rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:scale-110 hover:transition-transform;
+  }
+
+  .skill-card:hover {
+    box-shadow: 0 0 30px var(--color-brown-red);
+    transition: 0.3s all;
+  }
+
+  .skill-card {
+    @apply relative cursor-pointer text-gray-300 transition duration-300;
+  }
+
   .bg-shadow {
     @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(1,1,1,0.40)];
   }
@@ -53,6 +66,51 @@ body {
     @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(255,153,153,0.40)];
   }
 
+  .tooltip {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 2rem;
+    font-weight: 500;
+    width: 40rem;
+    max-width: 40rem;
+    text-align: left;
+    z-index: 10;
+  }
+
+  .tooltip-right {
+    left: calc(100% + 12px);
+  }
+
+  .tooltip-left {
+    right: calc(100% + 12px);
+  }
+
+  .tooltip-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .arrow-right {
+    left: -6px;
+    border-width: 6px 6px 6px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+  .arrow-left {
+    right: -6px;
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent white;
+  }
   .personalized-title {
     position: relative;
     display: inline-block;
@@ -78,16 +136,168 @@ body {
   .personalized-title:hover::after {
     opacity: 1;
   }
+
+  .projects-page-title {
+    @apply text-[3rem] self-start pb-[3rem] max-w-fit;
+  }
+
+  .projects-page-title::after {
+    content: "";
+    display: block;
+    width: 75%;
+    height: 0.3rem;
+    border-radius: 2rem;
+    /* margin-top: 0.rem; */
+    background-image: linear-gradient(
+      90deg,
+      #f996 5%,
+      #ff6b6b 50%,
+      #d97777 95%
+    );
+  }
+
+  .project {
+    @apply relative max-w-[30%] max-h-[32rem];
+  }
+
+  .project::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 0.3rem;
+    bottom: 0;
+    background-image: linear-gradient(
+      90deg,
+      #f996 5%,
+      #ff6b6b 50%,
+      #d97777 95%
+    );
+  }
+
+  .project:hover {
+    @apply duration-300 scale-115;
+  }
+
+  .project,
+  .cover {
+    @apply select-none cursor-pointer;
+  }
+
+  .project .cover div {
+    @apply z-1 text-center;
+  }
+
+  .project .cover::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .project .cover {
+    @apply absolute flex flex-col items-center justify-center gap-[1.5rem] top-[50%] left-[50.1%] transform -translate-x-1/2 -translate-y-1/2 
+  w-full h-full bg-black/40 transition-opacity duration-300;
+  }
+
+  .project:hover .cover {
+    @apply opacity-0;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-lg z-40;
+  }
+  .project-modal {
+    @apply flex flex-col gap-[2rem] fixed top-[50%] left-[50%] 
+      translate-x-[-50%] translate-y-[-50%] z-50 w-[80%] max-w-[900px] 
+      p-[3rem] bg-[#13131f] text-white rounded-[2rem] 
+      shadow-[0px_0px_25px_rgba(140,249,255,0.5)] border border-[#8cf9ff];
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .project-modal-header {
+    @apply flex justify-between items-center;
+  }
+
+  .project-modal-header h1 {
+    @apply text-[2.4rem] font-semibold text-[#8cf9ff] tracking-wide;
+  }
+
+  .project-modal-body {
+    @apply flex flex-col gap-[2rem] text-[1.6rem] leading-[1.8] text-gray-300;
+  }
+  .project-modal-body iframe {
+    @apply w-full h-[400px] shadow-lg;
+  }
+  .project-modal-description {
+    @apply mt-[2rem] text-[1.8rem];
+  }
+
+  .project-modal-body data {
+    @apply self-end;
+  }
+
+  /* Botões do modal */
+  .project-modal-buttons {
+    @apply flex flex-wrap gap-4 mt-[4rem];
+  }
+
+  .project-modal-btn {
+    @apply px-5 py-3 rounded-lg font-semibold text-[1.2rem] uppercase tracking-wide transition duration-300;
+  }
+
+  .project-modal-btn-code {
+    @apply bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-700;
+  }
+
+  .project-modal-btn-linkedin {
+    @apply bg-blue-600 text-white hover:bg-blue-500;
+  }
+
+  .project-modal-btn-live {
+    @apply bg-green-600 text-white hover:bg-green-500;
+  }
+
+  .project-modal-footer {
+    @apply flex justify-between;
+  }
+
+  .btn-close-modal {
+    @apply text-[3rem] text-[#8cf9ff] cursor-pointer transition-all duration-300;
+  }
+  .btn-close-modal:hover {
+    @apply text-red-500 scale-110;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .no-scroll {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .hover-transform-scale {
+    @apply hover:transition-transform hover:scale-125;
+  }
+
+  .container-center-full {
+    @apply flex items-center justify-center pb-[45rem] text-[4rem] h-[100vh];
+  }
 }
 
 @layer utilities {
   .hover\:custom-shadow:hover {
     box-shadow: 0 0 30px var(--special-color);
-    transition: 0.5s;
-  }
-
-  .hover\:bg-shadow-brown-red:hover {
-    box-shadow: 0 0 30px var(--color-brown-red);
     transition: 0.5s;
   }
 }
