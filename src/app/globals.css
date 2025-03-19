@@ -41,6 +41,25 @@ body {
   .special-color {
     color: var(--special-color);
   }
+
+  .home {
+    @apply container max-w-[80%] mx-auto grid grid-cols-4 items-center gap-y-[9rem] pt-[2rem] pb-[10rem];
+  }
+
+  .home-title {
+    @apply text-[4rem] pl-[4rem] pb-[4rem] font-semibold text-center;
+  }
+  .hero {
+    @apply col-span-4 grid grid-cols-8 gap-y-[5rem];
+  }
+
+  .text-about {
+    @apply col-span-5 pl-[4rem] justify-center flex flex-col gap-y-10  font-semibold;
+  }
+
+  .profile-picture {
+    @apply col-span-3 w-[45rem]  aspect-square overflow-hidden rounded-full;
+  }
   .skills {
     @apply flex flex-wrap items-center justify-center gap-x-[2rem] gap-y-[5rem] pt-[5rem];
   }
@@ -116,7 +135,7 @@ body {
     display: inline-block;
   }
   .personalized-title::after {
-    z-index: 10;
+    z-index: 50;
     content: attr(data-title);
     position: absolute;
     left: 120%;
@@ -137,139 +156,37 @@ body {
     opacity: 1;
   }
 
-  .projects-page-title {
-    @apply text-[3rem] self-start pb-[3rem] max-w-fit;
-  }
-
-  .projects-page-title::after {
-    content: "";
-    display: block;
-    width: 75%;
-    height: 0.3rem;
-    border-radius: 2rem;
-    /* margin-top: 0.rem; */
-    background-image: linear-gradient(
-      90deg,
-      #f996 5%,
-      #ff6b6b 50%,
-      #d97777 95%
-    );
-  }
-
-  .project {
-    @apply relative max-w-[30%] max-h-[32rem];
-  }
-
-  .project::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 0.3rem;
-    bottom: 0;
-    background-image: linear-gradient(
-      90deg,
-      #f996 5%,
-      #ff6b6b 50%,
-      #d97777 95%
-    );
-  }
-
-  .project:hover {
-    @apply duration-300 scale-115;
-  }
-
-  .project,
-  .cover {
-    @apply select-none cursor-pointer;
-  }
-
-  .project .cover div {
-    @apply z-1 text-center;
-  }
-
-  .project .cover::before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
-  }
-
-  .project .cover {
-    @apply absolute flex flex-col items-center justify-center gap-[1.5rem] top-[50%] left-[50.1%] transform -translate-x-1/2 -translate-y-1/2 
-  w-full h-full bg-black/40 transition-opacity duration-300;
-  }
-
-  .project:hover .cover {
-    @apply opacity-0;
-  }
-
-  /* MODAL */
-  .modal-overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-lg z-40;
-  }
-  .project-modal {
-    @apply flex flex-col gap-[2rem] fixed top-[50%] left-[50%] 
-      translate-x-[-50%] translate-y-[-50%] z-50 w-[80%] max-w-[900px] 
-      p-[3rem] bg-[#13131f] text-white rounded-[2rem] 
-      shadow-[0px_0px_25px_rgba(140,249,255,0.5)] border border-[#8cf9ff];
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .project-modal-header {
-    @apply flex justify-between items-center;
-  }
-
-  .project-modal-header h1 {
-    @apply text-[2.4rem] font-semibold text-[#8cf9ff] tracking-wide;
-  }
-
-  .project-modal-body {
-    @apply flex flex-col gap-[2rem] text-[1.6rem] leading-[1.8] text-gray-300;
-  }
-  .project-modal-body iframe {
-    @apply w-full h-[400px] shadow-lg;
-  }
-  .project-modal-description {
-    @apply mt-[2rem] text-[1.8rem];
-  }
-
-  .project-modal-body data {
-    @apply self-end;
-  }
-
-  /* Botões do modal */
-  .project-modal-buttons {
-    @apply flex flex-wrap gap-4 mt-[4rem];
-  }
-
-  .project-modal-btn {
-    @apply px-5 py-3 rounded-lg font-semibold text-[1.2rem] uppercase tracking-wide transition duration-300;
-  }
-
-  .project-modal-btn-code {
-    @apply bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-700;
-  }
-
-  .project-modal-btn-linkedin {
-    @apply bg-blue-600 text-white hover:bg-blue-500;
-  }
-
-  .project-modal-btn-live {
-    @apply bg-green-600 text-white hover:bg-green-500;
-  }
-
-  .project-modal-footer {
-    @apply flex justify-between;
-  }
-
   .btn-close-modal {
     @apply text-[3rem] text-[#8cf9ff] cursor-pointer transition-all duration-300;
   }
   .btn-close-modal:hover {
     @apply text-red-500 scale-110;
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda a tela */
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 40rem;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes fadeIn {
@@ -288,10 +205,6 @@ body {
 
   .hover-transform-scale {
     @apply hover:transition-transform hover:scale-125;
-  }
-
-  .container-center-full {
-    @apply flex items-center justify-center pb-[45rem] text-[4rem] h-[100vh];
   }
 }
 
