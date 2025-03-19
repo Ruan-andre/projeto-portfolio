@@ -2,7 +2,7 @@
 import {
   urlReposUtilities,
   urlReposUtilitiesFeatured,
-} from "@/assets/variables";
+} from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";

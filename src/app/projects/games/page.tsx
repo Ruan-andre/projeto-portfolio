@@ -1,5 +1,8 @@
 "use client";
-import { urlReposGames, urlReposGamesFeatured } from "@/assets/variables";
+import {
+  urlReposGames,
+  urlReposGamesFeatured,
+} from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
@@ -33,7 +36,7 @@ const Games = () => {
   }, []);
 
   if (isLoading) {
-    return <LoadingSpinner />; 
+    return <LoadingSpinner />;
   }
 
   return (

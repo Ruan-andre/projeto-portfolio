@@ -1,5 +1,8 @@
 "use client";
-import { urlReposPersonal, urlReposPersonalFeatured } from "@/assets/variables";
+import {
+  urlReposPersonal,
+  urlReposPersonalFeatured,
+} from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
