@@ -1,6 +1,11 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import {
+  urlRepoContent,
+  pathPortfolioContent,
+} from "@/constants/urlsApiGithub";
+import GithubProjectsData from "@/interfaces/GithubProjectsData";
+import fetchCache from "./cache/fetchCache";
+import { skillsData } from "@/constants/skillsData";
 
 const GetDate = (
   initialDate: Date,
@@ -62,28 +67,51 @@ const GetDate = (
   return response;
 };
 
-const useTypingEffect = (text: string = "", speed: number) => {
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    if (!text.trim()) {
-      setDisplayedText("");
-      return;
-    }
-
-    let index = 0;
-    setDisplayedText("");
-
-    const interval = setInterval(() => {
-      setDisplayedText(text.slice(0, index + 1));
-      index++;
-      if (index >= text.length) clearInterval(interval);
-    }, speed);
-
-    return () => clearInterval(interval);
-  }, [text, speed]);
-
-  return displayedText;
+const getJsonContentRepo = async (repoName: string) => {
+  const url = `${urlRepoContent}${repoName}/contents${pathPortfolioContent}`;
+  const response = await fetchCache(url);
+  if (!response || response.status?.includes("404")) {
+    return null;
+  }
+  const decodedContent = Buffer.from(response.content, "base64").toString(
+    "utf-8"
+  );
+  const jsonObject = JSON.parse(decodedContent);
+  return jsonObject;
 };
 
-export { GetDate, useTypingEffect };
+const getDataRepo = async (url: string) => {
+  const dataReposGames = await fetchCache(url);
+  const { items } = dataReposGames;
+
+  const dataGames: Array<GithubProjectsData> = items.map(
+    (item: GithubProjectsData) => ({
+      html_url: item.html_url,
+      name: item.name,
+      description: item.description,
+      created_at: item.created_at,
+    })
+  );
+
+  return dataGames;
+};
+
+const getTechnologies = (techs: string[]) => {
+  return techs
+    .map((techName) => {
+      const tech =
+        skillsData.backend.find((item) => item.title === techName) ||
+        skillsData.frontend.find((item) => item.title === techName);
+
+      if (tech) {
+        return {
+          name: techName,
+          iconName: tech.icon,
+        };
+      }
+      return null;
+    })
+    .filter((tech) => tech !== null);
+};
+
+export { GetDate, getJsonContentRepo, getDataRepo, getTechnologies };
