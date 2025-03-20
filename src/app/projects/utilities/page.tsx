@@ -11,20 +11,12 @@ import { useState, useEffect } from "react";
 
 const Utilities = () => {
   const [reposGames, setReposGames] = useState({} as GithubProjectsData[]);
-
-  const [reposGamesFeatured, setReposGamesFeatured] = useState(
-    {} as GithubProjectsData[]
-  );
+  const [reposGamesFeatured, setReposGamesFeatured] = useState({} as GithubProjectsData[]);
 
   useEffect(() => {
     async function fetchData() {
-      const dataGames = await getDataRepo(urlReposUtilities);
-      const dataGamesdataFeatured = await getDataRepo(
-        urlReposUtilitiesFeatured
-      );
-
-      setReposGames(dataGames);
-      setReposGamesFeatured(dataGamesdataFeatured);
+      setReposGames(await getDataRepo(urlReposUtilities));
+      setReposGamesFeatured(await getDataRepo(urlReposUtilitiesFeatured));
     }
 
     fetchData();

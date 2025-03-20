@@ -20,11 +20,8 @@ const Personal = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const dataPersonal = await getDataRepo(urlReposPersonal);
-      const dataPersonalFeatured = await getDataRepo(urlReposPersonalFeatured);
-
-      setReposPersonal(dataPersonal);
-      setReposPersonalFeatured(dataPersonalFeatured);
+      setReposPersonal(await getDataRepo(urlReposPersonal));
+      setReposPersonalFeatured(await getDataRepo(urlReposPersonalFeatured));
     }
 
     fetchData();

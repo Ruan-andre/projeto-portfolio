@@ -7,24 +7,19 @@ import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import LoadingSpinner from "@/components/LoadingSpinner"; // Importando o spinner
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { useState, useEffect } from "react";
 
 const Games = () => {
   const [reposGames, setReposGames] = useState<GithubProjectsData[]>([]);
-  const [reposGamesFeatured, setReposGamesFeatured] = useState<
-    GithubProjectsData[]
-  >([]);
+  const [reposGamesFeatured, setReposGamesFeatured] = useState<GithubProjectsData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const dataGames = await getDataRepo(urlReposGames);
-        const dataGamesFeatured = await getDataRepo(urlReposGamesFeatured);
-
-        setReposGames(dataGames);
-        setReposGamesFeatured(dataGamesFeatured);
+        setReposGames(await getDataRepo(urlReposGames));
+        setReposGamesFeatured(await getDataRepo(urlReposGamesFeatured));
       } catch (error) {
         console.error("Erro ao buscar os projetos:", error);
       } finally {
