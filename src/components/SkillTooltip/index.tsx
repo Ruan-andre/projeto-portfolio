@@ -3,7 +3,15 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
-const SkillTooltip = ({text, url, children, }: { text: string; url?: string; children: React.ReactNode; }) => {
+const SkillTooltip = ({
+  text,
+  url,
+  children,
+}: {
+  text: string;
+  url?: string;
+  children: React.ReactNode;
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [position, setPosition] = useState<"right" | "left">("right");
   const tooltipRef = useRef<HTMLDivElement | null>(null);

@@ -36,12 +36,13 @@ body {
   }
 
   .home {
-    @apply container max-sm:max-w-[90%] max-w-[80%] mx-auto grid grid-cols-4 items-center gap-y-[9rem] pt-[2rem] pb-[10rem];
+    @apply max-sm:max-w-[90%] max-w-[80%] mx-auto grid grid-cols-4 items-center gap-y-[9rem] pt-[2rem] pb-[10rem];
   }
 
   .home-title {
     @apply text-[4rem] pl-[4rem] pb-[4rem] font-semibold text-center;
   }
+
   .hero {
     @apply col-span-4 grid grid-cols-8 gap-y-[5rem];
   }
