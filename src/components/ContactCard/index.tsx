@@ -18,8 +18,14 @@ const ContactCard = ({
     if (info && !href) {
       e.preventDefault();
       try {
-        await navigator.clipboard.writeText(info);
-        openModal({ content: <h1>Texto copiado!</h1> });
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+          window.location.href = `mailto:${info}`;
+        } else {
+          await navigator.clipboard.writeText(info);
+          openModal({ content: <h1>Texto copiado!</h1> });
+        }
       } catch (err) {
         console.error("Falha ao copiar:", err);
       }
@@ -33,9 +39,9 @@ const ContactCard = ({
       className="flex flex-col items-center justify-center gap-[1rem] hover-transform-scale"
       onClick={handleClick}
     >
-      <Icon icon={iconName} width={iconSize || 70} height={iconSize || 70} />
+      <Icon icon={iconName} width={iconSize || 35} height={iconSize || 35} />
       <p className="text-[2rem]">{title}</p>
-      {info && <small className="text-[1.5rem]">{info}</small>}
+      {info && <p className="text-[1.5rem]">{info}</p>}
     </Link>
   );
 };

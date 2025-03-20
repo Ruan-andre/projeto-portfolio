@@ -17,17 +17,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="pt-BR">
       <GenericPopupMessageProvider>
         <body className={`${inter.className} relative min-h-screen pt-[3rem]`}>
           {children}
           <GenericPopupMessage />
-          <footer className="absolute left-0 right-0 bottom-0 bg-background">
+          <footer className="absolute left-0 right-0 bottom-0 bg-background w-full ">
             <section id="contacts" className="col-span-4 text-center">
               <h3 className="text-[4rem] pb-[4rem] font-semibold">Contatos</h3>
-              <div className="flex items-center justify-center gap-[17rem] bg-shadow-brown-red p-[4rem]">
+              <div className="contacts bg-shadow-brown-red">
                 <ContactCard
                   href="https://github.com/ruan-andre"
                   iconName="mdi:github"

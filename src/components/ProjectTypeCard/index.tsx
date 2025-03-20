@@ -7,7 +7,7 @@ const ProjectTypeCard = (data: CardData) => {
   return (
     <Link
       href={data.href}
-      className="flex flex-col w-[70rem] h-[48rem] gap-y-[1.5rem] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:custom-shadow"
+      className="flex flex-col gap-y-[1.5rem] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:custom-shadow"
     >
       <div className="w-full h-[80%] rounded-[4rem] overflow-hidden flex items-center justify-center">
         <Image
@@ -18,7 +18,7 @@ const ProjectTypeCard = (data: CardData) => {
           alt={data.title}
         />
       </div>
-      <div className="pl-[5rem] flex  items-center gap-[3rem]">
+      <div className="pl-[5rem] max-sm:pl-[0] flex  items-center gap-[3rem]">
         {data.icon && (
           <div>
             <Icon

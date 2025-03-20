@@ -88,7 +88,7 @@ export default function Home() {
         <main id="presentation" className="hero">
           <div className="text-about">
             {githubData?.name && (
-              <h1 className="text-7xl">
+              <h1>
                 Olá, eu sou{" "}
                 <span className="special-color tracking-widest">
                   {githubData.name}!
@@ -97,7 +97,7 @@ export default function Home() {
             )}
 
             {githubData?.name && (
-              <h2 className="text-5xl text-animation pt-[3rem] pb-[3rem]">
+              <h2 className="text-animation pt-[3rem] pb-[3rem]">
                 Sou{" "}
                 <span className="special-color tracking-widest ">
                   {professionalTitle}
@@ -105,7 +105,7 @@ export default function Home() {
               </h2>
             )}
 
-            <p className="max-w-[75rem] text-[2rem] text-[#a1a2a3] leading-[3.5rem] font-light">
+            <p className="text-[2rem] text-[#a1a2a3] leading-[3.5rem] font-light">
               Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na
               área da tecnologia há{" "}
               <span className="special-color opacity-100">
@@ -138,9 +138,9 @@ export default function Home() {
             </Link>
           </div>
 
-          <section id="projects" className="col-span-8">
+          <section id="projects" className="projects col-span-8">
             <h3 className="home-title">Projetos</h3>
-            <div className="flex gap-[2rem] ">
+            <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
               <ProjectTypeCard
                 imgSrc={engrenagemFundo.src}
                 title={"Utilitários"}
@@ -169,14 +169,14 @@ export default function Home() {
           </section>
         </main>
 
-        <section id="skills" className="pt-[5rem] col-span-4 mb-[40rem]">
+        <section id="skills" className="skills-container">
           <h3 className="home-title">Habilidades</h3>
           <div className="flex gap-[2rem] border-0 rounded-2xl w-full text-center pt-[2rem] pb-[2rem] bg-shadow-brown-red">
             <div
               id="backend"
               className="w-[50%] p-[1.5rem] border-r border-white/20 h-full"
             >
-              <h3 className="text-[4rem]">Backend</h3>
+              <h3 className="text-[4rem] skill-role">Backend</h3>
               <div className="skills">
                 {skillsData.backend.map((skill) => (
                   <SkillTooltip
@@ -193,7 +193,7 @@ export default function Home() {
             </div>
 
             <div id="frontend" className="w-[50%] p-[1.5rem]">
-              <h3 className="text-[4rem]">Frontend</h3>
+              <h3 className="text-[4rem] skill-role">Frontend</h3>
               <div className="skills">
                 {skillsData.frontend.map((skill) => (
                   <SkillTooltip
