@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ContactCard from "@/components/ContactCard";
 import { GenericPopupMessageProvider } from "@/context/GenericPopupMessageContext";
+import GenericPopupMessage from "@/components/GenericPopupMessage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +17,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const { openModal } = useModal();
 
   return (
     <html lang="pt-BR">
       <GenericPopupMessageProvider>
         <body className={`${inter.className} relative min-h-screen pt-[3rem]`}>
           {children}
+          <GenericPopupMessage />
           <footer className="absolute left-0 right-0 bottom-0 bg-background">
             <section id="contacts" className="col-span-4 text-center">
               <h3 className="text-[4rem] pb-[4rem] font-semibold">Contatos</h3>

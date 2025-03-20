@@ -1,40 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useGenericModal } from "@/context/GenericPopupMessageContext";
+import { useEffect, useState } from "react";
 
-interface PopupProps {
-  children: React.ReactNode;
-  className?: string;
-  onClose?: () => void;
-}
+const AUTO_CLOSE_DELAY = 3000;
 
-const GenericPopupMessage = ({
-  children,
-  className = "bg-green-500",
-  onClose,
-}: PopupProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+const GenericPopupMessage = () => {
+  const { isOpen, modalData, closeModal } = useGenericModal();
+  const [visible, setVisible] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-    if (onClose) onClose();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      setVisible(true);
+      const timer = setTimeout(() => {
+        closeModal();
+      }, AUTO_CLOSE_DELAY);
+      return () => clearTimeout(timer);
+    } else {
+      setTimeout(() => setVisible(false), 300);
+    }
+  }, [isOpen, closeModal]);
 
-  if (!isOpen) return null;
+  if (!visible) return null;
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center bg-black/50 ${className}`}
+      className={`fixed top-[7rem] right-[2rem] w-[25rem] h-[10rem] max-w-[25rem] max-h-[10rem] text-[1.8rem] p-4 rounded-lg shadow-lg flex items-center justify-center bg-green-500/90 transition-all duration-300 transform ${
+        isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+      } ${modalData?.bgClassColor || ""} ${modalData?.textClassColor || ""}`}
     >
-      <div className="bg-white p-6 rounded-lg shadow-lg relative">
-        <button
-          className="absolute top-2 right-2 text-lg font-bold"
-          onClick={handleClose}
-        >
-          ✖
-        </button>
-        {children}
-      </div>
+      {modalData?.content}
+      <button
+        className="absolute text-[1.2rem] top-3 right-3 text-lg font-bold hover:text-red-600 transition-colors duration-200"
+        onClick={closeModal}
+      >
+        ✖
+      </button>
     </div>
   );
 };

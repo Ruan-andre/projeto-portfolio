@@ -3,7 +3,7 @@
 import { Icon } from "@/assets/icons";
 import ContactCardProps from "@/interfaces/ContactCardProps";
 import Link from "next/link";
-// import { useModal } from "@/context/GenericPopupMessageContext";
+import { useGenericModal } from "@/context/GenericPopupMessageContext";
 
 const ContactCard = ({
   iconName,
@@ -12,14 +12,14 @@ const ContactCard = ({
   href,
   iconSize,
 }: ContactCardProps) => {
-  // const { openModal } = useModal();
+  const { openModal } = useGenericModal();
 
   const handleClick = async (e: React.MouseEvent) => {
     if (info && !href) {
       e.preventDefault();
       try {
         await navigator.clipboard.writeText(info);
-        // openModal();
+        openModal({ content: <h1>Texto copiado!</h1> });
       } catch (err) {
         console.error("Falha ao copiar:", err);
       }

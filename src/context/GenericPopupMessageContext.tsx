@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import GenericPopupContextType from "../interfaces/GenericPopupContextType";
 import GenericPopupMessageData from "@/interfaces/GenericPopupMessageData";
 
-const ModalContext = createContext<GenericPopupContextType | undefined>(
+const GenericModalContext = createContext<GenericPopupContextType | undefined>(
   undefined
 );
 export const GenericPopupMessageProvider = ({
@@ -43,14 +43,16 @@ export const GenericPopupMessageProvider = ({
   }, [isOpen]);
 
   return (
-    <ModalContext.Provider value={{ isOpen, modalData, openModal, closeModal }}>
+    <GenericModalContext.Provider
+      value={{ isOpen, modalData, openModal, closeModal }}
+    >
       {children}
-    </ModalContext.Provider>
+    </GenericModalContext.Provider>
   );
 };
 
-export const useModal = () => {
-  const context = useContext(ModalContext);
+export const useGenericModal = () => {
+  const context = useContext(GenericModalContext);
   if (!context) {
     throw new Error("useModal must be used within a ModalProvider");
   }

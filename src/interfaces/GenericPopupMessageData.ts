@@ -1,4 +1,5 @@
 interface GenericPopupMessageData {
+  content?: React.ReactNode;
   btnCloseClassColor?: string;
   bgClassColor?: string;
   textClassColor?: string;
