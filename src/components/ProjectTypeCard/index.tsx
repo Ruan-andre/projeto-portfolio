@@ -1,4 +1,4 @@
-import CardData from "@/interfaces/CardData.js";
+import CardData from "@/interfaces/CardData";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import Link from "next/link";
