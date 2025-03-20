@@ -62,7 +62,7 @@ const ProjectCard = ({
           />
           <div className="cover">
             <div>
-              <p className="text-[3rem]">{projectName}</p>
+              <p className="text-[3rem] max-sm:text-[1.5rem]">{projectName}</p>
               <p className="flex justify-center gap-[1rem]">
                 <ProjectTechnologies techs={technologies} />
               </p>
