@@ -15,7 +15,6 @@ const SkillTooltip = ({text, url, children, }: { text: string; url?: string; chi
       const containerRect = containerRef.current.getBoundingClientRect();
       const screenWidth = window.innerWidth;
 
-      // Verifica se o tooltip ultrapassa o limite direito da tela
       if (containerRect.right + tooltipRect.width > screenWidth) {
         setPosition("left");
       } else {

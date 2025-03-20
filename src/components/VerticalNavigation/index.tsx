@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import React from "react";
+import "./verticalNavigation.css";
 
 const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
   return (
@@ -14,7 +15,7 @@ const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
             return (
               <li
                 data-title={dataTitle}
-                className="hover:scale-125 hover:opacity-100 transition-transform opacity-45 personalized-title"
+                className="item personalized-title"
                 key={index}
               >
                 <Link href={href}> {item}</Link>

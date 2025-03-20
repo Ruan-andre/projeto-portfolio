@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+.item {
+  @apply opacity-45;
+}
+.item:hover {
+  @apply scale-125 opacity-100 transition-transform;
+}
