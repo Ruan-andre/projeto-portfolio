@@ -17,6 +17,7 @@ import SkillTooltip from "@/components/SkillTooltip";
 import { skillsData } from "@/constants/skillsData";
 import fetchCache from "@/functions/cache/fetchCache";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import Link from "next/link";
 
 export default function Home() {
   const [githubData, setGithubData] = useState<GithubData | null>(null);
@@ -34,6 +35,7 @@ export default function Home() {
           profileUrl: response.html_url,
           email: response.email,
         };
+
         setGithubData(data);
       } catch (error) {
         console.error("Erro ao buscar os dados do usuário", error);
@@ -121,14 +123,19 @@ export default function Home() {
           </div>
 
           <div className="profile-picture hover:custom-shadow">
-            <Image
-              alt="Foto de André Ruan"
-              src={githubData?.picture || ""}
-              width={400}
-              height={400}
-              className="object-cover w-full h-full"
-              priority
-            />
+            <Link
+              href={"https://www.linkedin.com/in/andr%C3%A9-ruan-554854250/"}
+              target="_blank"
+            >
+              <Image
+                alt="Foto de André Ruan"
+                src={githubData?.picture || ""}
+                width={400}
+                height={400}
+                className="object-cover w-full h-full"
+                priority
+              />
+            </Link>
           </div>
 
           <section id="projects" className="col-span-8">
@@ -202,7 +209,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          ;
         </section>
       </div>
     </>
