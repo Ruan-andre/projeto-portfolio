@@ -13,8 +13,8 @@ const ProjectTechnologies = ({
           key={index}
           icon={item.iconName}
           data-title={item.name}
-          width="25"
-          height="25"
+          width="30"
+          height="30"
         />
       ))}
     </>
