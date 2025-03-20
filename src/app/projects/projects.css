@@ -5,10 +5,11 @@
 }
 
 .projects-section {
-  @apply flex flex-col justify-center w-[80%] m-auto pb-[45rem];
+  @apply container max-w-[80%] m-auto mt-[7rem] flex flex-col;
+  /* @apply  flex flex-col justify-center items-center pb-[45rem]; */
 }
 
-.projects-section > div:first-child {
+.projects-section:first-child > div {
   @apply mt-[7rem] flex flex-col gap-y-[5rem];
 }
 
@@ -17,10 +18,10 @@
 }
 
 .container-center-full {
-  @apply flex items-center justify-center pb-[45rem] text-[4rem] h-[100vh];
+  @apply flex items-center justify-center pb-[45rem] max-sm:pb-[90rem] max-sm:pt-[15rem] text-[4rem] h-[100vh];
 }
 .projects-page-title {
-  @apply text-[3rem] self-start pb-[3rem] max-w-fit;
+  @apply text-[3rem] self-start mb-[5rem] mt-[5rem] max-w-fit;
 }
 
 .projects-page-title::after {
@@ -34,7 +35,7 @@
 }
 
 .project {
-  @apply relative max-w-[30%] max-h-[32rem];
+  @apply relative max-w-[50.2rem] max-h-[32rem];
 }
 
 .project::after {
@@ -87,7 +88,7 @@ w-full h-full bg-black/40 transition-opacity duration-300;
   @apply flex flex-col gap-[2rem] fixed top-[50%] left-[50%] 
       translate-x-[-50%] translate-y-[-50%] z-50 w-[80%] max-w-[900px] 
       p-[3rem] bg-[#13131f] text-white rounded-[2rem] 
-      shadow-[0px_0px_25px_rgba(140,249,255,0.5)] border border-[#8cf9ff];
+      shadow-[0px_0px_25px_rgba(140,249,255,0.5)] border border-[#8cf9ff] max-sm:h-[75%] max-sm:w-full;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -100,7 +101,7 @@ w-full h-full bg-black/40 transition-opacity duration-300;
 }
 
 .project-modal-body {
-  @apply flex flex-col gap-[2rem] text-[1.6rem] leading-[1.8] text-gray-300;
+  @apply flex flex-col gap-[2rem] text-[1.6rem] leading-[1.8] text-gray-300 max-sm:h-[75%];
 }
 .project-modal-body iframe {
   @apply w-full h-[400px] shadow-lg;
@@ -132,11 +133,11 @@ w-full h-full bg-black/40 transition-opacity duration-300;
 
 /* Container do vídeo */
 .video-container {
-  @apply w-full flex justify-center;
+  @apply w-full flex justify-center max-sm:h-[50%];
 }
 
 .project-modal-body iframe {
-  @apply w-full max-w-[800px] h-[400px] shadow-lg rounded-lg;
+  @apply w-full max-w-[800px] h-[400px] max-sm:h-[50%] shadow-lg rounded-lg;
 }
 
 /* Organização da área de informações */
