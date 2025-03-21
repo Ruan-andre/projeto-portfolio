@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+:root {
+  --background: #15161a;
+  --foreground: #ffffff;
+  --special-color: #8cf9ff;
+  --color-brown-red: rgba(255, 153, 153, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #15161a;
+    --foreground: #ffffff;
+  }
+}
+
+html,
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+@layer components {
+  .special-color {
+    color: var(--special-color);
+  }
+
+  .home {
+    @apply max-sm:max-w-[90%] max-w-[80%] mx-auto grid grid-cols-4 items-center gap-y-[9rem] pt-[2rem] pb-[10rem];
+  }
+
+  .home-title {
+    @apply text-[4rem] pl-[4rem] pb-[4rem] font-semibold text-center;
+  }
+
+  .hero {
+    @apply col-span-4 grid grid-cols-8 gap-y-[5rem];
+  }
+
+  .text-about {
+    @apply max-[1300px]:col-span-8  col-span-5 pl-[4rem] justify-center flex flex-col gap-y-10  font-semibold;
+  }
+
+  .text-about h1 {
+    @apply max-sm:text-5xl max-md:text-6xl md:text-7xl min-lg:text-7xl;
+  }
+  .text-about h2 {
+    @apply max-sm:text-4xl max-md:text-5xl md:text-5xl min-lg:text-6xl;
+  }
+
+  .text-about p {
+    @apply max-[1300px]:max-w-full xl:max-w-[75rem] max-[1300px]:w-full;
+  }
+
+  .profile-picture {
+    @apply max-[1300px]:col-span-8 max-[1300px]:row-start-1  max-[1300px]:justify-self-center w-[45rem]  max-md:w-[60%] max-sm:w-[60%] col-span-3   aspect-square overflow-hidden rounded-full;
+  }
+
+  .projects {
+    @apply max-[1200px]:flex flex-col max-[1200px]:items-center;
+  }
+  .projects > div {
+    @apply max-[1200px]:flex-col max-[1200px]:items-center max-[1200px]:w-[70%]  max-md:w-[80%];
+  }
+  .projects > div > a {
+    @apply max-[1200px]:h-[35rem] max-[1200px]:w-[100%];
+  }
+
+  .skills-container {
+    @apply pt-[5rem] col-span-4 mb-[40rem] max-sm:mb-[75rem];
+  }
+
+  .skills {
+    @apply flex flex-wrap items-center justify-center gap-x-[2rem] gap-y-[5rem] pt-[5rem] col-span-4;
+  }
+
+  .skill-role {
+    @apply max-[530px]:!text-[2rem];
+  }
+
+  .skill-card {
+    @apply max-sm:w-[10rem] max-sm:h-[15rem] w-[15rem] h-[20rem] flex flex-col items-center justify-center gap-[3rem] p-[2rem] bg-gray-900 border-gray-900 rounded-[2rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:scale-110 hover:transition-transform;
+  }
+
+  .skill-card:hover {
+    box-shadow: 0 0 30px var(--color-brown-red);
+    transition: 0.3s all;
+  }
+
+  .skill-card {
+    @apply relative cursor-pointer text-gray-300 transition duration-300;
+  }
+
+  .bg-shadow {
+    @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(1,1,1,0.40)];
+  }
+
+  .bg-shadow-brown-red {
+    @apply backdrop-blur-lg shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_0px_15px_rgba(255,153,153,0.40)];
+  }
+
+  .tooltip {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 2rem;
+    font-weight: 500;
+    width: 40rem;
+    max-width: 40rem;
+    text-align: left;
+    z-index: 10;
+  }
+
+  .tooltip-right {
+    left: calc(100% + 12px);
+  }
+
+  .tooltip-left {
+    right: calc(100% + 12px);
+  }
+
+  .tooltip-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .arrow-right {
+    left: -6px;
+    border-width: 6px 6px 6px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+  .arrow-left {
+    right: -6px;
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent white;
+  }
+  .personalized-title {
+    position: relative;
+    display: inline-block;
+  }
+  .personalized-title::after {
+    z-index: 50;
+    content: attr(data-title);
+    position: absolute;
+    left: 120%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .personalized-title:hover::after {
+    opacity: 1;
+  }
+
+  .btn-close-modal {
+    @apply text-[3rem] text-[#8cf9ff] cursor-pointer transition-all duration-300;
+  }
+  .btn-close-modal:hover {
+    @apply text-red-500 scale-110;
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 40rem;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .no-scroll {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .hover-transform-scale {
+    @apply min-md:hover:transition-transform min-md:hover:scale-125;
+  }
+
+  .contacts {
+    @apply flex items-center justify-center gap-[17rem] p-[4rem] max-md:gap-[10rem] max-sm:flex-col max-sm:gap-[6rem];
+  }
+}
+
+@layer utilities {
+  .hover\:custom-shadow:hover {
+    box-shadow: 0 0 30px var(--special-color);
+    transition: 0.5s;
+  }
+}

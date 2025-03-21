@@ -1,0 +1,24 @@
+import { Icon } from "../../../public/assets/icons";
+import Technologies from "@/types/Technologies";
+
+const ProjectTechnologies = ({
+  techs,
+}: {
+  techs: Technologies[] | undefined;
+}) => {
+  return (
+    <>
+      {techs?.map((item, index) => (
+        <Icon
+          key={index}
+          icon={item.iconName}
+          data-title={item.name}
+          width="30"
+          height="30"
+        />
+      ))}
+    </>
+  );
+};
+
+export default ProjectTechnologies;
