@@ -4,8 +4,17 @@ const fetchCache = async (url: string) => {
   const cacheKey = url + new Date().getUTCDay();
   const cachedData = localStorage.getItem(cacheKey);
 
+  const lastUpdatedResponse = await fetch("/api/lastUpdated");
+  const { lastUpdated } = await lastUpdatedResponse.json();
+
+  const lastUpdatedDate = new Date(lastUpdated);
+
   if (cachedData) {
-    return JSON.parse(cachedData);
+    const cachedDate = new Date(localStorage.getItem(`${cacheKey}_date`) || "0");
+
+    if (cachedDate >= lastUpdatedDate) {
+      return JSON.parse(cachedData);
+    }
   }
 
   if (url.includes("/contents/")) {
@@ -21,9 +30,7 @@ const fetchCache = async (url: string) => {
       return null;
     }
 
-    const hasPortfolioFolder = contents.filter((item) =>
-      item.name.includes("portfolio-content")
-    );
+    const hasPortfolioFolder = contents.filter((item) => item.name.includes("portfolio-content"));
 
     if (hasPortfolioFolder.length === 0) {
       return null;
@@ -34,14 +41,10 @@ const fetchCache = async (url: string) => {
     headers: headerFetch(),
   });
 
-  // if (!response.ok) {
-  //   if (response.url.includes("/contents/")) return;
-  //   console.warn(`Erro ao buscar endpoint ${response.url}`);
-  //   return;
-  // }
-
   const data = await response.json();
+
   localStorage.setItem(cacheKey, JSON.stringify(data));
+  localStorage.setItem(`${cacheKey}_date`, new Date().toISOString());
 
   return data;
 };
