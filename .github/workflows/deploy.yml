@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Concede permissões de escrita no conteúdo do repositório
+
     steps:
       # Passo 1: Verificar o código
       - name: Checkout Repository
