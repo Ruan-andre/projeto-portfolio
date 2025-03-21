@@ -1,13 +1,18 @@
 import headerFetch from "@/constants/headerFetch";
 
 const fetchCache = async (url: string) => {
-  const cacheKey = url + new Date().getUTCDay();
+  const cacheKey = url;
   const cachedData = localStorage.getItem(cacheKey);
 
-  const lastUpdatedResponse = await fetch("/api/lastUpdated");
-  const { lastUpdated } = await lastUpdatedResponse.json();
+  let lastUpdatedDate = new Date(sessionStorage.getItem("lastUpdated") || "0");
 
-  const lastUpdatedDate = new Date(lastUpdated);
+  if (lastUpdatedDate.getTime() === 0) {
+    const lastUpdatedResponse = await fetch("/api/lastUpdated");
+    const { lastUpdated } = await lastUpdatedResponse.json();
+
+    lastUpdatedDate = new Date(lastUpdated);
+    sessionStorage.setItem("lastUpdated", lastUpdatedDate.toISOString());
+  }
 
   if (cachedData) {
     const cachedDate = new Date(localStorage.getItem(`${cacheKey}_date`) || "0");
@@ -30,9 +35,9 @@ const fetchCache = async (url: string) => {
       return null;
     }
 
-    const hasPortfolioFolder = contents.filter((item) => item.name.includes("portfolio-content"));
+    const hasPortfolioFolder = contents.some((item) => item.name.includes("portfolio-content"));
 
-    if (hasPortfolioFolder.length === 0) {
+    if (!hasPortfolioFolder) {
       return null;
     }
   }
