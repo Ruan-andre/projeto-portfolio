@@ -29,7 +29,7 @@ jobs:
 
        # Passo 4: Cache do Node.js e Build do Next.js
       - name: Cache Next.js build
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
@@ -37,6 +37,7 @@ jobs:
           key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-next-
+
             
       # Passo 5: Configurar o Node.js
       - name: Set up Node.js
