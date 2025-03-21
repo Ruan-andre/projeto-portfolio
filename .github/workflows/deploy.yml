@@ -3,31 +3,50 @@ name: Deploy and Update Last Updated File
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Passo 1: Verificar o código
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
+
+      # Passo 2: Criar diretórios, caso não existam
+      - name: Create directories if they don't exist
+        run: mkdir -p src/app/api/lastUpdated
+
+      # Passo 3: Atualizar o arquivo lastUpdated.json com a data do deploy
       - name: Update lastUpdated.json with the current date
         run: |
           echo "{\"lastUpdated\": \"$(date --utc +'%FT%TZ')\"}" > src/app/api/lastUpdated/lastUpdated.json
         working-directory: ./
 
+      # Passo 4: Configurar o Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '22.13.1' 
 
+      # Passo 5: Instalar dependências
       - name: Install dependencies
         run: npm install
 
+      # Passo 6: Build do projeto
       - name: Build Project
         run: npm run build
-      
+
+      # Passo 7: Commit e push do arquivo lastUpdated.json
+      - name: Commit lastUpdated.json
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add src/app/api/lastUpdated/lastUpdated.json
+          git commit -m "Update lastUpdated.json with the latest deploy time"
+          git push
+
+      # Passo 8: Deploy para Vercel
       - name: Deploy to Vercel
         run: npm run deploy
