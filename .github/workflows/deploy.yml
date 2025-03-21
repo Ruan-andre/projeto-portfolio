@@ -1,0 +1,33 @@
+name: Deploy and Update Last Updated File
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Update lastUpdated.json with the current date
+        run: |
+          echo "{\"lastUpdated\": \"$(date --utc +'%FT%TZ')\"}" > src/app/api/lastUpdated/lastUpdated.json
+        working-directory: ./
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22.13.1' 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+      
+      - name: Deploy to Vercel
+        run: npm run deploy
