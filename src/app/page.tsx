@@ -55,78 +55,41 @@ export default function Home() {
   return (
     <>
       <VerticalNavigation>
-        <Icon
-          icon="ic:round-home"
-          width="35"
-          height="35"
-          data-title="Inicio"
-          href="#presentation"
-        />
-        <Icon
-          href="#projects"
-          icon="fluent:tabs-16-filled"
-          width="35"
-          height="35"
-          data-title="Projetos"
-        />
-        <Icon
-          icon="fa6-solid:code"
-          href="#skills"
-          width="35"
-          height="35"
-          data-title="Habilidades"
-        />
-        <Icon
-          href="#contacts"
-          icon="uiw:mail"
-          width="35"
-          height="35"
-          data-title="Contato"
-        />
+        <Icon icon="ic:round-home" width="35" height="35" data-title="Inicio" href="#presentation" />
+        <Icon href="#projects" icon="fluent:tabs-16-filled" width="35" height="35" data-title="Projetos" />
+        <Icon icon="fa6-solid:code" href="#skills" width="35" height="35" data-title="Habilidades" />
+        <Icon href="#contacts" icon="uiw:mail" width="35" height="35" data-title="Contato" />
       </VerticalNavigation>
       <div className="home">
         <main id="presentation" className="hero">
           <div className="text-about">
             {githubData?.name && (
               <h1>
-                Olá, eu sou{" "}
-                <span className="special-color tracking-widest">
-                  {githubData.name}!
-                </span>
+                Olá, eu sou <span className="special-color tracking-widest">{githubData.name}!</span>
               </h1>
             )}
 
             {githubData?.name && (
               <h2 className="text-animation pt-[3rem] pb-[3rem]">
-                Sou{" "}
-                <span className="special-color tracking-widest ">
-                  {professionalTitle}
-                </span>
+                Sou <span className="special-color tracking-widest ">{professionalTitle}</span>
               </h2>
             )}
 
             <p className="text-[2rem] text-[#a1a2a3] leading-[3.5rem] font-light">
-              Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na
-              área da tecnologia há{" "}
+              Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na área da tecnologia há{" "}
               <span className="special-color opacity-100">
                 {GetDate(new Date("2020-01-01"), "Y", true)} anos.
               </span>{" "}
               Minha paixão pela programação começou há{" "}
-              <span className="special-color">
-                {GetDate(new Date("2020-07-01"), "Y", true)} anos,
-              </span>{" "}
-              quando iniciei a faculdade de Análise e Desenvolvimento de
-              Sistemas. Hoje, trabalho profissionalmente como Desenvolvedor Full
-              Stack, mas admito que o backend é minha verdadeira paixão.😂❤️
+              <span className="special-color">{GetDate(new Date("2020-07-01"), "Y", true)} anos,</span> quando
+              iniciei a faculdade de Análise e Desenvolvimento de Sistemas. Hoje, trabalho profissionalmente
+              como Desenvolvedor Full Stack, mas admito que o backend é minha verdadeira paixão.😂❤️
               <br />
             </p>
           </div>
 
           <div className="profile-picture hover:custom-shadow">
-            <Link
-              href={"https://www.linkedin.com/in/andr%C3%A9-ruan-554854250/"}
-              target="_blank"
-            >
+            <Link href={"https://www.linkedin.com/in/andr%C3%A9-ruan-554854250/"} target="_blank">
               <Image
                 alt="Foto de André Ruan"
                 src={githubData?.picture || ""}
@@ -138,7 +101,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <section id="projects" className="projects col-span-8 ">
+          <section id="projects" className="projects col-span-8">
             <h3 className="home-title">Projetos</h3>
             <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
               <ProjectTypeCard
@@ -172,18 +135,11 @@ export default function Home() {
         <section id="skills" className="skills-container">
           <h3 className="home-title">Habilidades</h3>
           <div className="flex gap-[2rem] border-0 rounded-2xl w-full text-center pt-[2rem] pb-[2rem] bg-shadow-brown-red">
-            <div
-              id="backend"
-              className="w-[50%] p-[1.5rem] border-r border-white/20 h-full"
-            >
+            <div id="backend" className="w-[50%] p-[1.5rem] border-r border-white/20 h-full">
               <h3 className="text-[4rem] skill-role">Backend</h3>
               <div className="skills">
                 {skillsData.backend.map((skill) => (
-                  <SkillTooltip
-                    key={skill.title}
-                    text={skill.text}
-                    url={skill.url}
-                  >
+                  <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
                     <SkillCard title={skill.title}>
                       <Icon icon={skill.icon} width="70" height="70" />
                     </SkillCard>
@@ -196,11 +152,7 @@ export default function Home() {
               <h3 className="text-[4rem] skill-role">Frontend</h3>
               <div className="skills">
                 {skillsData.frontend.map((skill) => (
-                  <SkillTooltip
-                    key={skill.title}
-                    text={skill.text}
-                    url={skill.url}
-                  >
+                  <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
                     <SkillCard title={skill.title}>
                       <Icon icon={skill.icon} width="70" height="70" />
                     </SkillCard>
