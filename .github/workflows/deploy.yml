@@ -49,7 +49,3 @@ jobs:
           git add src/app/api/lastUpdated/lastUpdated.json
           git commit -m "Update lastUpdated.json with the latest deploy time"
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
-      # Passo 8: Deploy para Vercel
-      - name: Deploy to Vercel
-        run: npm run deploy
