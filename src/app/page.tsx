@@ -101,7 +101,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <section id="projects" className="projects col-span-8">
+          <section id="projects" className="projects col-span-8 ">
             <h3 className="home-title">Projetos</h3>
             <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
               <ProjectTypeCard
