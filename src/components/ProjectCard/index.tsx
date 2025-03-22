@@ -58,9 +58,9 @@ const ProjectCard = ({ name, html_url, description, created_at }: GithubProjects
           <div className="cover">
             <div>
               <p className="text-[3rem] max-sm:text-[1.5rem]">{projectName}</p>
-              <p className="flex justify-center gap-[1rem]">
+              <div className="flex justify-center gap-[1rem]">
                 <ProjectTechnologies techs={technologies} />
-              </p>
+              </div>
             </div>
           </div>
         </div>
