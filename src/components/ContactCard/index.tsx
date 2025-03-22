@@ -5,13 +5,7 @@ import ContactCardProps from "@/interfaces/ContactCardProps";
 import Link from "next/link";
 import { useGenericModal } from "@/context/GenericPopupMessageContext";
 
-const ContactCard = ({
-  iconName,
-  title,
-  info,
-  href,
-  iconSize,
-}: ContactCardProps) => {
+const ContactCard = ({ iconName, title, info, href, iconSize }: ContactCardProps) => {
   const { openModal } = useGenericModal();
 
   const handleClick = async (e: React.MouseEvent) => {
@@ -36,7 +30,7 @@ const ContactCard = ({
     <Link
       href={href || "#contacts"}
       target={href ? "_blank" : ""}
-      className="flex flex-col items-center justify-center gap-[1rem] hover-transform-scale"
+      className="flex flex-col items-center min-h-[9rem] justify-between gap-2.5 hover-transform-scale"
       onClick={handleClick}
     >
       <Icon icon={iconName} width={iconSize || 35} height={iconSize || 35} />
