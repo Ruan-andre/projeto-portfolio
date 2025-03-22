@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/assets/icons";
+import { Icon } from "../../../public/assets/icons";
 import ContactCardProps from "@/interfaces/ContactCardProps";
 import Link from "next/link";
 import { useGenericModal } from "@/context/GenericPopupMessageContext";

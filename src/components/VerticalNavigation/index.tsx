@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import "./verticalNavigation.css";
-import { Icon } from "@/assets/icons";
+import { Icon } from "../../../public/assets/icons";
 
 const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
   const [isOpen, setIsOpen] = useState(false);

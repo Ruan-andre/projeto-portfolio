@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "../assets/icons";
+import { Icon } from "../../public/assets/icons";
 import Image from "next/image";
 import { GetDate } from "@/functions/";
 import useTypingEffect from "@/hooks/useTypingEffect";
