@@ -164,8 +164,12 @@ body {
     position: relative;
     display: inline-block;
   }
+
+  .personalized-title:hover {
+    z-index: 999;
+  }
   .personalized-title::after {
-    z-index: 50;
+    z-index: 999;
     content: attr(data-title);
     position: absolute;
     left: 120%;
