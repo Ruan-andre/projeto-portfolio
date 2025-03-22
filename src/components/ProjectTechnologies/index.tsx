@@ -1,4 +1,4 @@
-import { Icon } from "@/assets/icons";
+import { Icon } from "../../../public/assets/icons";
 import Technologies from "@/types/Technologies";
 
 const ProjectTechnologies = ({

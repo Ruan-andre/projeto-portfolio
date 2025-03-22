@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/assets/icons";
+import { Icon } from "../../../public/assets/icons";
 import VerticalNavigation from "@/components/VerticalNavigation";
 import { usePathname } from "next/navigation";
 import ProjectsTypes from "@/enums/ProjectsTypes";
