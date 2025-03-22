@@ -1,5 +1,6 @@
 import { useProjectsModal } from "@/context/ProjectsModalContext";
 import ProjectTechnologies from "../ProjectTechnologies";
+import { Icon } from "../../../public/assets/icons";
 
 const ProjectPopupDetails = () => {
   const { isOpen, modalData, closeModal } = useProjectsModal();
@@ -18,11 +19,7 @@ const ProjectPopupDetails = () => {
 
         <div className="project-modal-body">
           <div className="video-container">
-            <iframe
-              src={modalData.urlVideo}
-              allowFullScreen
-              title="Vídeo do projeto"
-            ></iframe>
+            <iframe src={modalData.urlVideo} allowFullScreen title="Vídeo do projeto"></iframe>
           </div>
 
           <div className="project-info">
@@ -43,6 +40,7 @@ const ProjectPopupDetails = () => {
                 rel="noopener noreferrer"
                 className="project-modal-btn project-modal-btn-code"
               >
+                <Icon icon="ri:github-fill" width="30" height="30" />
                 Código {`</>`}
               </a>
               {modalData?.linkedin && (
@@ -52,6 +50,7 @@ const ProjectPopupDetails = () => {
                   rel="noopener noreferrer"
                   className="project-modal-btn project-modal-btn-linkedin"
                 >
+                  <Icon icon="uil:linkedin" width="30" height="30" />
                   Post LinkedIn
                 </a>
               )}
@@ -62,11 +61,12 @@ const ProjectPopupDetails = () => {
                   rel="noopener noreferrer"
                   className="project-modal-btn project-modal-btn-live"
                 >
+                  <Icon icon="lsicon:play-filled" width="30" height="30" />
                   Acessar Projeto
                 </a>
               )}
             </div>
-            <data className="project-modal-date">{modalData.created_at}</data>
+            <data className="project-modal-date">Criado em: {modalData.created_at}</data>
           </footer>
         </div>
       </div>

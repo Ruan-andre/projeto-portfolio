@@ -107,7 +107,7 @@ w-full h-full bg-black/40 transition-opacity duration-300;
 }
 
 .project-modal-btn {
-  @apply px-5 py-3 rounded-lg font-semibold text-[1.2rem] uppercase tracking-wide transition duration-300;
+  @apply flex gap-2 items-center px-5 py-3 rounded-lg font-semibold text-[1.2rem] max-sm:text-sm uppercase tracking-wide transition duration-300;
 }
 
 .project-modal-btn-code {
@@ -132,11 +132,11 @@ w-full h-full bg-black/40 transition-opacity duration-300;
 
 /* Container do vídeo */
 .video-container {
-  @apply w-full flex justify-center max-sm:h-[50%];
+  @apply w-full flex justify-center max-sm:h-[100%] max-sm:w-[100%];
 }
 
 .project-modal-body iframe {
-  @apply w-full max-w-[800px] h-[400px] max-sm:h-[50%] shadow-lg rounded-lg;
+  @apply w-full max-w-[800px] max-sm:h-[100%] max-sm:w-[100%] shadow-lg rounded-lg;
 }
 
 /* Organização da área de informações */
@@ -157,11 +157,15 @@ w-full h-full bg-black/40 transition-opacity duration-300;
   @apply flex flex-wrap justify-center gap-4 mt-6;
 }
 
+.project-modal-buttons a svg {
+  @apply max-sm:w-[20px] max-sm:h-[20px];
+}
+
 .project-modal-footer {
   @apply flex flex-col items-center justify-center gap-4 mt-6;
 }
 
 /* Estilização da data */
 .project-modal-date {
-  @apply text-gray-400 text-[1.4rem] mt-2;
+  @apply text-gray-400 text-[1.4rem] mt-2 self-end;
 }
