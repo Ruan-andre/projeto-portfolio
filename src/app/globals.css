@@ -14,14 +14,14 @@
   }
 }
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
-}
-
-html {
-  font-size: 62.5%;
 }
 
 body {
@@ -66,18 +66,21 @@ body {
     @apply max-[1300px]:col-span-8 max-[1300px]:row-start-1  max-[1300px]:justify-self-center w-[45rem]  max-md:w-[60%] max-sm:w-[60%] col-span-3   aspect-square overflow-hidden rounded-full;
   }
 
-  .projects {
+  .project-type-card-container {
     @apply max-[1200px]:flex flex-col max-[1200px]:items-center;
   }
-  .projects > div {
+  .project-type-card-container > div {
     @apply max-[1200px]:flex-col max-[1200px]:items-center max-[1200px]:w-[70%]  max-md:w-[80%];
   }
-  .projects > div > a {
+  .project-type-card-container > div > a {
     @apply max-[1200px]:h-[35rem] max-[1200px]:w-[100%];
+  }
+  .project-type-card {
+    @apply flex flex-col gap-y-[1.5rem] min-lg:w-[33%] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100;
   }
 
   .skills-container {
-    @apply pt-[5rem] col-span-4 mb-[40rem] max-sm:mb-[75rem];
+    @apply pt-[5rem] col-span-4;
   }
 
   .skills {
