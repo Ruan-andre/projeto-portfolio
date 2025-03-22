@@ -8,12 +8,7 @@ import JsonContentType from "@/types/JsonContentType";
 import Technologies from "@/types/Technologies";
 import ProjectTechnologies from "../ProjectTechnologies";
 
-const ProjectCard = ({
-  name,
-  html_url,
-  description,
-  created_at,
-}: GithubProjectsData) => {
+const ProjectCard = ({ name, html_url, description, created_at }: GithubProjectsData) => {
   const [jsonContent, setjsonContent] = useState<JsonContentType | null>(null);
   const [technologies, setTechnologies] = useState<Technologies[]>([]);
   const { openModal } = useProjectsModal();

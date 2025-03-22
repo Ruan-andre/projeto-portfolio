@@ -1,8 +1,5 @@
 "use client";
-import {
-  urlReposGames,
-  urlReposGamesFeatured,
-} from "@/constants/urlsApiGithub";
+import { urlReposGames, urlReposGamesFeatured } from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
@@ -37,11 +34,7 @@ const Games = () => {
   return (
     <>
       {reposGames.length > 0 || reposGamesFeatured.length > 0 ? (
-        <ProjectsCards
-          title="Projetos de Jogos"
-          items={reposGames}
-          featuredItems={reposGamesFeatured}
-        />
+        <ProjectsCards title="Projetos de Jogos" items={reposGames} featuredItems={reposGamesFeatured} />
       ) : (
         <NoProjectsFound />
       )}

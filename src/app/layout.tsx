@@ -23,9 +23,11 @@ export default function RootLayout({
         <body className={`${inter.className} relative min-h-screen pt-[3rem]`}>
           {children}
           <GenericPopupMessage />
-          <footer className="absolute left-0 right-0 bottom-0 bg-background w-full ">
-            <section id="contacts" className="col-span-4 text-center">
-              <h3 className="text-[4rem] pb-[4rem] font-semibold">Contatos</h3>
+          <footer className="relative bg-background w-full mt-[10rem] top-[100%]">
+            <h3 className="text-[4rem] pb-[4rem] pr-[7rem] max-sm:pr-0 font-semibold text-center">
+              Contatos
+            </h3>
+            <section id="contacts" className="col-span-4 flex flex-col">
               <div className="contacts bg-shadow-brown-red">
                 <ContactCard
                   href="https://github.com/ruan-andre"
@@ -38,16 +40,10 @@ export default function RootLayout({
                   iconName="devicon:linkedin"
                   title="Linkedin"
                 />
-                <ContactCard
-                  iconName="logos:google-gmail"
-                  title="E-mail"
-                  info="ruan.fullstack@gmail.com"
-                />
+                <ContactCard iconName="logos:google-gmail" title="E-mail" info="ruan.fullstack@gmail.com" />
               </div>
             </section>
-            <p className="text-[1.6rem] text-center mb-[2rem] mt-[2rem]">
-              © André Ruan | 2025
-            </p>
+            <p className="text-[1.6rem] text-center mb-[2rem] mt-[2rem]">© André Ruan | 2025</p>
           </footer>
         </body>
       </GenericPopupMessageProvider>

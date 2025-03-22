@@ -17,7 +17,7 @@
 }
 
 .container-center-full {
-  @apply flex items-center justify-center pb-[45rem] max-sm:pb-[90rem] max-sm:pt-[15rem] text-[4rem] h-[100vh];
+  @apply flex items-center justify-center h-[50vh] text-[4rem];
 }
 .projects-page-title {
   @apply text-[3rem] self-start mb-[5rem] mt-[5rem] max-w-fit;

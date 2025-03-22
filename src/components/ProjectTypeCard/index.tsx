@@ -5,10 +5,7 @@ import Link from "next/link";
 
 const ProjectTypeCard = (data: CardData) => {
   return (
-    <Link
-      href={data.href}
-      className="flex flex-col gap-y-[1.5rem] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 hover:custom-shadow"
-    >
+    <Link href={data.href} className="project-type-card hover:custom-shadow">
       <div className="w-full h-[80%] rounded-[4rem] overflow-hidden flex items-center justify-center">
         <Image
           className="w-full h-full object-cover"
@@ -21,11 +18,7 @@ const ProjectTypeCard = (data: CardData) => {
       <div className="pl-[5rem] max-sm:pl-[0] flex  items-center gap-[3rem]">
         {data.icon && (
           <div>
-            <Icon
-              icon={data.icon}
-              width={data?.iconSize || "35"}
-              height={data?.iconSize || "35"}
-            />
+            <Icon icon={data.icon} width={data?.iconSize || "35"} height={data?.iconSize || "35"} />
           </div>
         )}
         <div>

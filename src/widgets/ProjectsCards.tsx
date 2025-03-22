@@ -5,7 +5,7 @@ const ProjectsCards = ({ title, items, featuredItems }: ProjectsCardsProps) => {
   return (
     <section className="projects-section">
       <h1 className="text-[4rem] text-center">{title}</h1>
-      <div className="max-sm:mb-[80rem] mb-[50rem] flex flex-col gap-[3rem]">
+      <div className="flex flex-col gap-[3rem]">
         {featuredItems.length > 0 && (
           <div>
             <h2 className="projects-page-title">Destaques</h2>
