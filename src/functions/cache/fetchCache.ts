@@ -3,6 +3,7 @@ import headerFetch from "@/constants/headerFetch";
 const fetchCache = async (url: string) => {
   const cacheKey = url;
   const cachedData = localStorage.getItem(cacheKey);
+  let data; //Vai ser utilizado para validar antes de cachear
 
   let lastUpdatedDate = new Date(sessionStorage.getItem("lastUpdated") || "0");
 
@@ -22,36 +23,42 @@ const fetchCache = async (url: string) => {
     }
   }
 
-  if (url.includes("/contents/")) {
-    const urlContents = url.substring(0, url.indexOf("/contents/") + 10);
+  try {
+    if (url.includes("/contents/")) {
+      const urlContents = url.substring(0, url.indexOf("/contents/") + 10);
 
-    const responseContents = await fetch(urlContents, {
+      const responseContents = await fetch(urlContents, {
+        headers: headerFetch(),
+      });
+
+      const contents = await responseContents.json();
+
+      let hasPortfolioFolder;
+      if (contents && Array.isArray(contents)) {
+        hasPortfolioFolder = contents.some((item) => item.name.includes("portfolio-content"));
+      }
+
+      if (!hasPortfolioFolder) {
+        data = null;
+        return;
+      }
+    }
+
+    const response = await fetch(url, {
       headers: headerFetch(),
     });
 
-    const contents = await responseContents.json();
-
-    if (!contents || !Array.isArray(contents)) {
-      return null;
+    data = await response.json();
+    if (Array.isArray(data.items) && data.items.length === 0) {
+      data = null;
     }
-
-    const hasPortfolioFolder = contents.some((item) => item.name.includes("portfolio-content"));
-
-    if (!hasPortfolioFolder) {
-      return null;
-    }
+    return data;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    localStorage.setItem(cacheKey, JSON.stringify(data));
+    localStorage.setItem(`${cacheKey}_date`, new Date().toISOString());
   }
-
-  const response = await fetch(url, {
-    headers: headerFetch(),
-  });
-
-  const data = await response.json();
-
-  localStorage.setItem(cacheKey, JSON.stringify(data));
-  localStorage.setItem(`${cacheKey}_date`, new Date().toISOString());
-
-  return data;
 };
 
 export default fetchCache;
