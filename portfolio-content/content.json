@@ -1,7 +1,7 @@
 {
-  "url_cover": "https://raw.githubusercontent.com/Ruan-andre/Teste-de-commit/refs/heads/main/Screenshot_20.png",
-  "url_video": "",
-  "url_linkedin": "",
+  "url_cover": "https://raw.githubusercontent.com/Ruan-andre/projeto-portfolio/refs/heads/main/portfolio-content/cover.png",
+  "url_video": "https://streamable.com/e/act6u8?",
+  "url_linkedin": "https://linkedin.com",
   "url_live_project": "https://a-ruan-portfolio.vercel.app/",
   "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
 }
