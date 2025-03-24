@@ -16,12 +16,13 @@ import { urlUserRepo } from "@/constants/urlsApiGithub";
 import SkillTooltip from "@/components/SkillTooltip";
 import { skillsData } from "@/constants/skillsData";
 import fetchCache from "@/functions/cache/fetchCache";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import Link from "next/link";
+import SkeletonHome from "@/components/skeletons/home";
+import { useSkeleton } from "@/context/SkeletonContext";
 
 export default function Home() {
   const [githubData, setGithubData] = useState<GithubData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {
     async function fetchData() {
@@ -44,12 +45,13 @@ export default function Home() {
       }
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const professionalTitle = useTypingEffect(githubData?.bio || "", 100);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <SkeletonHome />;
   }
 
   return (

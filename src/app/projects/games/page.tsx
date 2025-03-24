@@ -4,13 +4,14 @@ import NoProjectsFound from "@/components/NoProjectsFound";
 import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import { useState, useEffect } from "react";
+import { useSkeleton } from "@/context/SkeletonContext";
+import SkeletonProjects from "@/components/skeletons/projects";
 
 const Games = () => {
   const [reposGames, setReposGames] = useState<GithubProjectsData[]>([]);
   const [reposGamesFeatured, setReposGamesFeatured] = useState<GithubProjectsData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {
     async function fetchData() {
@@ -25,10 +26,11 @@ const Games = () => {
     }
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <SkeletonProjects />;
   }
 
   return (
