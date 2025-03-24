@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .item {
-  @apply opacity-45;
+  @apply opacity-45 duration-300;
 }
 
 .item:hover {
