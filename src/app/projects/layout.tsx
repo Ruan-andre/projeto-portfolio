@@ -8,11 +8,7 @@ import { ProjectsModalProvider } from "@/context/ProjectsModalContext";
 import ProjectPopupDetails from "@/components/ProjectPopupDetails";
 import "./projects.css";
 
-export default function ProjectsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
     <ProjectsModalProvider>
       <LayoutContent>{children}</LayoutContent>
@@ -75,13 +71,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       <VerticalNavigation>
-        <Icon
-          icon="ic:round-home"
-          width="35"
-          height="35"
-          data-title="Inicio"
-          href="/"
-        />
+        <Icon icon="ic:round-home" width="35" height="35" data-title="Inicio" href="/" />
         <Icon
           icon={attrIcon1.nameIcon}
           width="35"
