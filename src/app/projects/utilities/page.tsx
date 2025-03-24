@@ -9,13 +9,13 @@ import { useSkeleton } from "@/context/SkeletonContext";
 import SkeletonProjects from "@/components/skeletons/projects";
 
 const Utilities = () => {
-  const [reposGames, setReposGames] = useState({} as GithubProjectsData[]);
+  const [reposUtilities, setReposUtilities] = useState({} as GithubProjectsData[]);
   const [reposGamesFeatured, setReposGamesFeatured] = useState({} as GithubProjectsData[]);
   const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {
     async function fetchData() {
-      setReposGames(await getDataRepo(urlReposUtilities));
+      setReposUtilities(await getDataRepo(urlReposUtilities));
       setReposGamesFeatured(await getDataRepo(urlReposUtilitiesFeatured));
       setIsLoading(false);
     }
@@ -24,18 +24,14 @@ const Utilities = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) {
-    return <SkeletonProjects />;
-  } else {
-    setIsLoading(true);
-  }
+  if (isLoading) return <SkeletonProjects />;
 
   return (
     <>
-      {((reposGames.length > 0 || reposGamesFeatured.length > 0) && (
+      {((reposUtilities.length > 0 || reposGamesFeatured.length > 0) && (
         <ProjectsCards
           title="Projetos de Utilitários"
-          items={reposGames}
+          items={reposUtilities}
           featuredItems={reposGamesFeatured}
         />
       )) || <NoProjectsFound />}

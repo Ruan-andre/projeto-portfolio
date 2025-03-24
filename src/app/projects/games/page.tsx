@@ -29,9 +29,7 @@ const Games = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) {
-    return <SkeletonProjects />;
-  }
+  if (isLoading) return <SkeletonProjects />;
 
   return (
     <>
