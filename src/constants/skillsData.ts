@@ -6,12 +6,12 @@ export const skillsData = {
       text: "O C# é uma linguagem de programação moderna, inovadora e amplamente usada no ambiente empresarial.",
       url: "https://dotnet.microsoft.com/pt-br/languages/csharp",
     },
-    {
-      title: "Python",
-      icon: "material-icon-theme:python",
-      text: "Python é uma linguagem versátil e poderosa, usada para desenvolvimento web, ciência de dados e automação.",
-      url: "https://www.python.org/",
-    },
+    // {
+    //   title: "Python",
+    //   icon: "material-icon-theme:python",
+    //   text: "Python é uma linguagem versátil e poderosa, usada para desenvolvimento web, ciência de dados e automação.",
+    //   url: "https://www.python.org/",
+    // },
     {
       title: "Node.js",
       icon: "logos:nodejs",
