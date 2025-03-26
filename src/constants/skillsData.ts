@@ -38,7 +38,7 @@ export const skillsData = {
     },
     {
       title: "SQLite",
-      icon: "devicon:sqlite",
+      icon: "skill-icons:sqlite",
       text: "SQLite é um banco de dados relacional leve e embutido, amplamente usado em aplicações locais e móveis.",
       url: "https://www.sqlite.org/",
     },
