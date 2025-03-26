@@ -36,6 +36,18 @@ export const skillsData = {
       text: "PostgreSQL é um banco de dados relacional open-source avançado, conhecido por sua confiabilidade e extensibilidade.",
       url: "https://www.postgresql.org/",
     },
+    {
+      title: "SQLite",
+      icon: "devicon:sqlite",
+      text: "SQLite é um banco de dados relacional leve e embutido, amplamente usado em aplicações locais e móveis.",
+      url: "https://www.sqlite.org/",
+    },
+    {
+      title: "Entity Framework Core",
+      icon: "simple-icons:dotnet",
+      text: "Entity Framework Core é um ORM moderno para .NET, facilitando a comunicação entre aplicações e bancos de dados.",
+      url: "https://learn.microsoft.com/pt-br/ef/core/",
+    },
   ],
   frontend: [
     {
