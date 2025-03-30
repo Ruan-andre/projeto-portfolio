@@ -3,22 +3,12 @@ import headerFetch from "@/constants/headerFetch";
 const fetchCache = async (url: string) => {
   const cacheKey = url;
   const cachedData = localStorage.getItem(cacheKey);
-  let data; //Vai ser utilizado para validar antes de cachear
-
-  let lastUpdatedDate = new Date(sessionStorage.getItem("lastUpdated") || "0");
-
-  if (lastUpdatedDate.getTime() === 0) {
-    const lastUpdatedResponse = await fetch("/api/lastUpdated");
-    const { lastUpdated } = await lastUpdatedResponse.json();
-
-    lastUpdatedDate = new Date(lastUpdated);
-    sessionStorage.setItem("lastUpdated", lastUpdatedDate.toISOString());
-  }
+  let data;
 
   if (cachedData) {
     const cachedDate = new Date(localStorage.getItem(`${cacheKey}_date`) || "0");
-
-    if (cachedDate >= lastUpdatedDate) {
+    const twelveHoursAgo = Date.now() - 12 * 60 * 60 * 1000;
+    if (cachedDate.getTime() >= twelveHoursAgo) {
       return JSON.parse(cachedData);
     }
   }
