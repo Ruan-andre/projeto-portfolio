@@ -1,5 +1,5 @@
 import CardData from "@/interfaces/CardData";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "../../../public/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
 
