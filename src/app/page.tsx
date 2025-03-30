@@ -1,24 +1,36 @@
 "use client";
 
+//GENERAL
 import { Icon } from "../../public/assets/icons";
 import Image from "next/image";
-import { GetDate } from "@/functions/";
+import GithubData from "@/interfaces/GithubProfileData";
+import { urlUserRepo } from "@/constants/urlsApiGithub";
+import { skillsData } from "@/constants/skillsData";
+import Link from "next/link";
+import { useSkeleton } from "@/context/SkeletonContext";
+
+//COMPONENTS
+import SkillCard from "@/components/SkillCard";
+import ProjectTypeCard from "@/components/ProjectTypeCard";
+import VerticalNavigation from "@/components/VerticalNavigation";
+import SkillTooltip from "@/components/SkillTooltip";
+import SkeletonHome from "@/components/skeletons/home";
+import GenericCarousel from "@/components/GenericCarousel";
+
+//HOOKS
 import useTypingEffect from "@/hooks/useTypingEffect";
 import { useEffect, useState } from "react";
-import GithubData from "@/interfaces/GithubProfileData";
-import ProjectTypeCard from "@/components/ProjectTypeCard";
-import game from "../../public/assets/img/game.jpg";
-import engrenagemFundo from "../../public/assets/img/engrenagem.png";
-import pessoal from "@/../public/assets/img/pessoal.jpg";
-import SkillCard from "@/components/SkillCard";
-import VerticalNavigation from "@/components/VerticalNavigation";
-import { urlUserRepo } from "@/constants/urlsApiGithub";
-import SkillTooltip from "@/components/SkillTooltip";
-import { skillsData } from "@/constants/skillsData";
+
+//FUNCTIONS
 import fetchCache from "@/functions/cache/fetchCache";
-import Link from "next/link";
-import SkeletonHome from "@/components/skeletons/home";
-import { useSkeleton } from "@/context/SkeletonContext";
+import { GetDate } from "@/functions/";
+
+// IMAGES
+import imgGear from "../../public/assets/img/engrenagem.png";
+import imgPersonal from "@/../public/assets/img/pessoal.jpg";
+import imgGame from "../../public/assets/img/game.jpg";
+import imgBook from "../../public/assets/img/livro2.png";
+import profilePicture from "../../public/assets/img/profile-picture.jpg";
 
 export default function Home() {
   const [githubData, setGithubData] = useState<GithubData | null>(null);
@@ -94,7 +106,7 @@ export default function Home() {
             <Link href={"https://www.linkedin.com/in/andr%C3%A9-ruan-554854250/"} target="_blank">
               <Image
                 alt="Foto de André Ruan"
-                src={githubData?.picture || ""}
+                src={profilePicture.src}
                 width={400}
                 height={400}
                 className="object-cover w-full h-full"
@@ -105,7 +117,43 @@ export default function Home() {
 
           <section id="projects" className="project-type-card-container col-span-8 ">
             <h3 className="home-title">Projetos</h3>
-            <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
+            <div className="flex ">
+              <GenericCarousel>
+                <ProjectTypeCard
+                  imgSrc={imgGear.src}
+                  title={"Ferramentas & Utilitários"}
+                  aboutCard={"Projetos de softwares utilitários em geral"}
+                  icon="mdi:gear"
+                  iconSize={50}
+                  href="/projects/utilities"
+                />
+                <ProjectTypeCard
+                  imgSrc={imgGame.src}
+                  title={"Games"}
+                  aboutCard={"Projetos de jogos"}
+                  icon="mingcute:game-2-fill"
+                  iconSize={50}
+                  href="/projects/games"
+                />
+                <ProjectTypeCard
+                  imgSrc={imgPersonal.src}
+                  title={"Pessoais"}
+                  aboutCard={"Projetos de uso pessoal"}
+                  icon="ion:person"
+                  iconSize={50}
+                  href="/projects/personal"
+                />
+                <ProjectTypeCard
+                  imgSrc={imgBook.src}
+                  title={"Acadêmicos & Estudos"}
+                  aboutCard={"Projetos de cursos/estudos"}
+                  icon="ion:book"
+                  iconSize={50}
+                  href="/projects/academics"
+                />
+              </GenericCarousel>
+            </div>
+            {/* <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
               <ProjectTypeCard
                 imgSrc={engrenagemFundo.src}
                 title={"Utilitários"}
@@ -130,7 +178,7 @@ export default function Home() {
                 iconSize={50}
                 href="/projects/personal"
               />
-            </div>
+            </div> */}
           </section>
         </main>
 
