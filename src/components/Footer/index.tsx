@@ -28,6 +28,12 @@ const Footer = () => {
             title="Linkedin"
           />
           <ContactCard iconName="logos:google-gmail" title="E-mail" info="ruan.fullstack@gmail.com" />
+          <ContactCard
+            iconName="skill-icons:discord"
+            href="https://discordapp.com/users/798981432113365043"
+            title="Discord"
+            info="ruan.andre97"
+          />
         </div>
       </section>
       <p className="text-[1.6rem] text-center mb-[2rem] mt-[2rem]">© André Ruan | 2025</p>
