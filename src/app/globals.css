@@ -40,7 +40,7 @@ body {
   }
 
   .home-title {
-    @apply text-[4rem] pl-[4rem] pb-[4rem] font-semibold text-center;
+    @apply text-[4rem] pl-[4rem] font-semibold text-center;
   }
 
   .hero {
@@ -67,16 +67,16 @@ body {
   }
 
   .project-type-card-container {
-    @apply max-[1200px]:flex flex-col max-[1200px]:items-center;
+    @apply max-[1200px]:flex flex-col;
   }
   .project-type-card-container > div {
-    @apply max-[1200px]:flex-col max-[1200px]:items-center max-[1200px]:w-[70%]  max-md:w-[80%];
+    @apply max-[1200px]:flex-col max-[1200px]:items-center  max-md:w-[100%];
   }
   .project-type-card-container > div > a {
     @apply max-[1200px]:h-[35rem] max-[1200px]:w-[100%];
   }
   .project-type-card {
-    @apply flex flex-col gap-y-[1.5rem] min-lg:w-[33%] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100;
+    @apply flex flex-col min-lg:w-[95%] min-lg:h-[75%] max-lg:h-[80%] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 cursor-grab active:cursor-grabbing;
   }
 
   .skills-container {
@@ -242,7 +242,41 @@ body {
   }
 
   .contacts {
-    @apply flex items-center justify-center gap-[17rem] p-[4rem] max-md:gap-[10rem] max-sm:flex-col max-sm:gap-[6rem];
+    @apply flex items-center justify-center gap-[17rem] p-[4rem] max-md:gap-[10rem] max-sm:grid max-sm:grid-cols-2 /*max-sm:gap-[6rem]*/;
+  }
+
+  .swiper {
+    width: 100% !important;
+    max-height: 700px !important;
+    overflow: visible !important;
+    @apply max-sm:!overflow-hidden;
+  }
+
+  .swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    /* @apply max-md:!w-[100%]; */
+  }
+
+  .swiper-scrollbar {
+    height: 13px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .swiper-scrollbar-drag {
+    background-color: var(--special-color) !important;
+    border-radius: 10px;
+  }
+
+  .swiper-disabled {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .swiper-disabled .swiper-slide {
+    width: 100% !important;
+    margin: 0 !important;
   }
 }
 
