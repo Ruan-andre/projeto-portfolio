@@ -13,10 +13,10 @@ const ContactCard = ({ iconName, title, info, href, iconSize }: ContactCardProps
       e.preventDefault();
       try {
         const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
-        if (isMobile) {
+        const isEmail = title.toLowerCase().includes("e-mail") || title.toLowerCase().includes("email");
+        if (isMobile && isEmail) {
           window.location.href = `mailto:${info}`;
-        } else {
+        } else if (isEmail) {
           await navigator.clipboard.writeText(info);
           openModal({ content: <h1>Texto copiado!</h1> });
         }
