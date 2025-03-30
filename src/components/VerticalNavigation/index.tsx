@@ -15,7 +15,7 @@ const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
       </button>
 
       <nav
-        className={`bg-black/10 border border-white/10 rounded-[80px] backdrop-blur-lg shadow-lg shadow-black/20 ${
+        className={`bg-black/45 border border-white/10 rounded-[80px] backdrop-blur-lg shadow-lg shadow-black/20 ${
           isOpen ? "block" : "hidden"
         } md:block`}
       >
@@ -30,15 +30,9 @@ const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
                 key={index}
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <Link
-                  className="flex flex-col justify-center items-center"
-                  href={href}
-                >
+                <Link className="flex flex-col justify-center items-center" href={href}>
                   {" "}
-                  {item}{" "}
-                  <span className="text-white text-2xl hidden max-sm:block">
-                    {dataTitle}
-                  </span>
+                  {item} <span className="text-white text-2xl hidden max-md:block">{dataTitle}</span>
                 </Link>
               </li>
             );

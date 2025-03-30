@@ -51,7 +51,7 @@ export const skillsData = {
   ],
   frontend: [
     {
-      title: "HTML 5",
+      title: "HTML",
       icon: "vscode-icons:file-type-html",
       text: "HTML5 é a versão mais recente do HTML, permitindo a criação de páginas web modernas e responsivas.",
       url: "https://developer.mozilla.org/pt-BR/docs/Web/HTML",

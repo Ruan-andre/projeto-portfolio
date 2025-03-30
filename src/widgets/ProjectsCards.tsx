@@ -12,13 +12,15 @@ const ProjectsCards = ({ title, items, featuredItems }: ProjectsCardsProps) => {
             <div className="projects-list">
               {featuredItems.map((item, index) => {
                 return (
+                  <div key={index} className="featured">
                   <ProjectCard
-                    key={index}
+                    
                     html_url={item.html_url}
                     name={item.name}
                     description={item.description}
                     created_at={item.created_at}
                   />
+                  </div>
                 );
               })}
             </div>
