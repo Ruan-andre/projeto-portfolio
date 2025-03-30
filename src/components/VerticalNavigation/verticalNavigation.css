@@ -55,6 +55,6 @@
   }
 
   ul {
-    @apply flex flex-col items-start max-sm:items-center max-sm:justify-center justify-center h-full pl-5;
+    @apply flex flex-col items-start max-md:items-center max-md:justify-center justify-center h-full pl-5;
   }
 }
