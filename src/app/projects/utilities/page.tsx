@@ -9,8 +9,8 @@ import { useSkeleton } from "@/context/SkeletonContext";
 import SkeletonProjects from "@/components/skeletons/projects";
 
 const Utilities = () => {
-  const [reposUtilities, setReposUtilities] = useState({} as GithubProjectsData[]);
-  const [reposGamesFeatured, setReposGamesFeatured] = useState({} as GithubProjectsData[]);
+  const [reposUtilities, setReposUtilities] = useState<GithubProjectsData[]>([]);
+  const [reposGamesFeatured, setReposGamesFeatured] = useState<GithubProjectsData[]>([]);
   const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {

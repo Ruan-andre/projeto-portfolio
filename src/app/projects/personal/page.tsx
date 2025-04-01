@@ -9,8 +9,8 @@ import { useSkeleton } from "@/context/SkeletonContext";
 import SkeletonProjects from "@/components/skeletons/projects";
 
 const Personal = () => {
-  const [reposPersonal, setReposPersonal] = useState({} as GithubProjectsData[]);
-  const [reposPersonalFeatured, setReposPersonalFeatured] = useState({} as GithubProjectsData[]);
+  const [reposPersonal, setReposPersonal] = useState<GithubProjectsData[]>([]);
+  const [reposPersonalFeatured, setReposPersonalFeatured] = useState<GithubProjectsData[]>([]);
   const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {

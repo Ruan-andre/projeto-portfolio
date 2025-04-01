@@ -79,7 +79,7 @@ export default function Home() {
           <div className="text-about">
             {githubData?.name && (
               <h1>
-                Olá, eu sou <span className="special-color tracking-widest">{githubData.name}!</span>
+                Olá, eu sou <span className="special-color tracking-widest">{githubData?.name}!</span>
               </h1>
             )}
 
