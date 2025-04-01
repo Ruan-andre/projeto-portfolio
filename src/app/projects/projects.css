@@ -121,6 +121,9 @@ w-full h-full bg-black/40 transition-opacity duration-300;
 .project-modal-btn-live {
   @apply bg-green-600 text-white hover:bg-green-500;
 }
+.project-modal-btn-watch {
+  @apply bg-[#0F90FA] text-white hover:bg-[#0F90FA]/80;
+}
 
 .project-modal-footer {
   @apply flex justify-between;

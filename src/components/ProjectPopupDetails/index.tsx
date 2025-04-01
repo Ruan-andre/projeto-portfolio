@@ -7,6 +7,8 @@ const ProjectPopupDetails = () => {
 
   if (!isOpen || !modalData) return null;
 
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="project-modal" onClick={(e) => e.stopPropagation()}>
@@ -19,7 +21,18 @@ const ProjectPopupDetails = () => {
 
         <div className="project-modal-body">
           <div className="video-container">
-            <iframe src={modalData.urlVideo} allowFullScreen title="Vídeo do projeto"></iframe>
+            {modalData.urlVideo &&
+              ((isMobile && (
+                <a
+                  href={modalData.urlVideo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-modal-btn project-modal-btn-watch"
+                >
+                  <Icon icon="lsicon:play-filled" width="30" height="30" />
+                  Assistir vídeo
+                </a>
+              )) || <iframe src={modalData.urlVideo} allowFullScreen title="Vídeo do projeto"></iframe>)}
           </div>
 
           <div className="project-info">
