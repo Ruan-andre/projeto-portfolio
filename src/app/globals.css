@@ -63,7 +63,7 @@ body {
   }
 
   .profile-picture {
-    @apply max-[1300px]:col-span-8 max-[1300px]:row-start-1  max-[1300px]:justify-self-center w-[45rem]  max-md:w-[60%] max-sm:w-[60%] col-span-3   aspect-square overflow-hidden rounded-full;
+    @apply max-[1300px]:col-span-8 max-[1300px]:row-start-1  max-[1300px]:justify-self-center w-[45rem]  max-md:w-[75%] max-sm:w-[75%] col-span-3   aspect-square overflow-hidden rounded-full;
   }
 
   .project-type-card-container {
