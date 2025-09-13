@@ -152,32 +152,6 @@ export default function Home() {
                 />
               </GenericCarousel>
             </div>
-            {/* <div className="flex gap-[2rem] max-sm:w-full max-sm:items-center">
-              <ProjectTypeCard
-                imgSrc={engrenagemFundo.src}
-                title={"Utilitários"}
-                aboutCard={"Projetos de softwares utilitários em geral"}
-                icon="mdi:gear"
-                iconSize={50}
-                href="/projects/utilities"
-              />
-              <ProjectTypeCard
-                imgSrc={game.src}
-                title={"Games"}
-                aboutCard={"Projetos de jogos"}
-                icon="mingcute:game-2-fill"
-                iconSize={50}
-                href="/projects/games"
-              />
-              <ProjectTypeCard
-                imgSrc={pessoal.src}
-                title={"Pessoais"}
-                aboutCard={"Projetos de uso pessoal"}
-                icon="ion:person"
-                iconSize={50}
-                href="/projects/personal"
-              />
-            </div> */}
           </section>
         </main>
 
