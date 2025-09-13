@@ -79,6 +79,9 @@ body {
     @apply flex flex-col min-lg:w-[95%] min-lg:h-[75%] max-lg:h-[80%] border-8 bg-gray-900 border-gray-900 rounded-[4rem] backdrop-blur-lg shadow-lg shadow-black/100 cursor-grab active:cursor-grabbing;
   }
 
+  .skill-session-title {
+    @apply text-xl md:text-3xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide;
+  }
   .skills-container {
     @apply pt-[5rem] col-span-4;
   }
