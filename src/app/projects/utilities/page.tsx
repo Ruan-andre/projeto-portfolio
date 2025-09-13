@@ -10,13 +10,13 @@ import SkeletonProjects from "@/components/skeletons/projects";
 
 const Utilities = () => {
   const [reposUtilities, setReposUtilities] = useState<GithubProjectsData[]>([]);
-  const [reposGamesFeatured, setReposGamesFeatured] = useState<GithubProjectsData[]>([]);
+  const [reposUtilitiesFeatured, setReposUtilitiesFeatured] = useState<GithubProjectsData[]>([]);
   const { isLoading, setIsLoading } = useSkeleton();
 
   useEffect(() => {
     async function fetchData() {
       setReposUtilities(await getDataRepo(urlReposUtilities));
-      setReposGamesFeatured(await getDataRepo(urlReposUtilitiesFeatured));
+      setReposUtilitiesFeatured(await getDataRepo(urlReposUtilitiesFeatured));
       setIsLoading(false);
     }
 
@@ -28,11 +28,11 @@ const Utilities = () => {
 
   return (
     <>
-      {((reposUtilities.length > 0 || reposGamesFeatured.length > 0) && (
+      {((reposUtilities.length > 0 || reposUtilitiesFeatured.length > 0) && (
         <ProjectsCards
           title="Projetos de Utilitários"
           items={reposUtilities}
-          featuredItems={reposGamesFeatured}
+          featuredItems={reposUtilitiesFeatured}
         />
       )) || <NoProjectsFound />}
     </>
