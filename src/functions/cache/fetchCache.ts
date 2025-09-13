@@ -7,8 +7,8 @@ const fetchCache = async (url: string) => {
 
   if (cachedData) {
     const cachedDate = new Date(localStorage.getItem(`${cacheKey}_date`) || "0");
-    const twelveHoursAgo = Date.now() - 12 * 60 * 60 * 1000;
-    if (cachedDate.getTime() >= twelveHoursAgo) {
+    const oneHourAgo = Date.now() - 1 * 60 * 60 * 1000;
+    if (cachedDate.getTime() >= oneHourAgo) {
       return JSON.parse(cachedData);
     }
   }
