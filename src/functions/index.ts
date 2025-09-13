@@ -88,9 +88,9 @@ const getDataRepo = async (url: string) => {
 const getTechnologies = (techs: string[]) => {
   return techs
     .map((techName) => {
-      const tech =
-        skillsData.backend.find((item) => item.title === techName) ||
-        skillsData.frontend.find((item) => item.title === techName);
+      const tech = Object.values(skillsData)
+        .flat()
+        .find((item) => item.title === techName);
 
       if (tech) {
         return {
