@@ -119,7 +119,7 @@ body {
     gap: 1rem;
     top: 0;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     color: #111;
     padding: 10px 12px;
     border-radius: 8px;
@@ -127,9 +127,43 @@ body {
     font-size: 2rem;
     font-weight: 500;
     width: 40rem;
-    max-width: 40rem;
+    max-width: 90vw;
+    min-width: 16rem;
     text-align: left;
-    z-index: 10;
+    z-index: 50;
+    word-break: break-word;
+  }
+
+  @media (max-width: 600px) {
+    .tooltip {
+      position: fixed !important;
+      left: 50% !important;
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) !important;
+      width: 92vw;
+      min-width: 0;
+      max-width: 98vw;
+      max-height: 70vh;
+      font-size: 1.4rem;
+      padding: 10px 10px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      z-index: 9999;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    }
+    .tooltip-right,
+    .tooltip-left {
+      left: 50% !important;
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) !important;
+    }
+    .tooltip-arrow {
+      display: none;
+    }
   }
 
   .tooltip-right {
