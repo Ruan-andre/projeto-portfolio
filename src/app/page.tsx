@@ -94,10 +94,9 @@ export default function Home() {
               <span className="special-color opacity-100">
                 {GetDate(new Date("2020-01-01"), "Y", true)} anos.
               </span>{" "}
-              Minha paixão pela programação começou há{" "}
-              <span className="special-color">{GetDate(new Date("2020-07-01"), "Y", true)} anos,</span> quando
-              iniciei a faculdade de Análise e Desenvolvimento de Sistemas. Hoje, trabalho profissionalmente
-              como Desenvolvedor Full Stack, mas admito que o backend é minha verdadeira paixão.😂❤️
+              Minha paixão pela programação começou quando iniciei a faculdade de Análise e Desenvolvimento de
+              Sistemas. Hoje, trabalho profissionalmente como Desenvolvedor Full Stack, mas admito que o
+              backend é minha verdadeira paixão.😂❤️
               <br />
             </p>
           </div>
@@ -184,30 +183,103 @@ export default function Home() {
 
         <section id="skills" className="skills-container">
           <h3 className="home-title">Habilidades</h3>
-          <div className="flex gap-[2rem] border-0 rounded-2xl w-full text-center pt-[2rem] pb-[2rem] bg-shadow-brown-red">
-            <div id="backend" className="w-[50%] p-[1.5rem] border-r border-white/20 h-full">
-              <h3 className="text-[4rem] skill-role">Backend</h3>
-              <div className="skills">
-                {skillsData.backend.map((skill) => (
-                  <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
-                    <SkillCard title={skill.title}>
-                      <Icon icon={skill.icon} width="70" height="70" />
-                    </SkillCard>
-                  </SkillTooltip>
-                ))}
+          <div
+            className="w-full max-w-6xl mx-auto bg-[#181a20] border border-[#23263a] rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col gap-0"
+            style={{ boxShadow: "0 0 32px 0 #1e293b55, 0 2px 32px 0 #38bdf855" }}
+          >
+            {/* Linguagens de Programação */}
+            <div className="mb-6">
+              <h4 className="text-xl md:text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide">
+                Linguagens de Programação
+              </h4>
+              <div className="skills justify-center">
+                {skillsData.frontend
+                  .filter((skill) => ["JavaScript", "TypeScript"].includes(skill.title))
+                  .concat(skillsData.backend.filter((skill) => skill.title === "C#"))
+                  .map((skill) => (
+                    <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
+                      <SkillCard title={skill.title}>
+                        <Icon icon={skill.icon} width="70" height="70" />
+                      </SkillCard>
+                    </SkillTooltip>
+                  ))}
               </div>
             </div>
+            <div className="border-t border-[#2a2d3d] my-2 opacity-60" />
 
-            <div id="frontend" className="w-[50%] p-[1.5rem]">
-              <h3 className="text-[4rem] skill-role">Frontend</h3>
-              <div className="skills">
-                {skillsData.frontend.map((skill) => (
-                  <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
-                    <SkillCard title={skill.title}>
-                      <Icon icon={skill.icon} width="70" height="70" />
-                    </SkillCard>
-                  </SkillTooltip>
-                ))}
+            {/* Frameworks e Bibliotecas */}
+            <div className="mb-6">
+              <h4 className="text-xl md:text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide">
+                Frameworks e Bibliotecas
+              </h4>
+              <div className="skills justify-center">
+                {skillsData.backend
+                  .filter((skill) => ["Entity Framework Core"].includes(skill.title))
+                  .concat(skillsData.frontend.filter((skill) => ["React", "Next.js"].includes(skill.title)))
+                  .concat(skillsData.backend.filter((skill) => skill.title === ".NET"))
+                  .map((skill) => (
+                    <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
+                      <SkillCard title={skill.title}>
+                        <Icon icon={skill.icon} width="70" height="70" />
+                      </SkillCard>
+                    </SkillTooltip>
+                  ))}
+              </div>
+            </div>
+            <div className="border-t border-[#2a2d3d] my-2 opacity-60" />
+
+            {/* Front-end */}
+            <div className="mb-6">
+              <h4 className="text-xl md:text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide">
+                Front-end
+              </h4>
+              <div className="skills justify-center">
+                {skillsData.frontend
+                  .filter((skill) => ["HTML", "CSS", "Tailwind CSS"].includes(skill.title))
+                  .map((skill) => (
+                    <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
+                      <SkillCard title={skill.title}>
+                        <Icon icon={skill.icon} width="70" height="70" />
+                      </SkillCard>
+                    </SkillTooltip>
+                  ))}
+              </div>
+            </div>
+            <div className="border-t border-[#2a2d3d] my-2 opacity-60" />
+
+            {/* Banco de Dados */}
+            <div className="mb-6">
+              <h4 className="text-xl md:text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide">
+                Banco de Dados
+              </h4>
+              <div className="skills justify-center">
+                {skillsData.backend
+                  .filter((skill) => ["SQL Server", "MySQL", "PostgreSQL", "SQLite"].includes(skill.title))
+                  .map((skill) => (
+                    <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
+                      <SkillCard title={skill.title}>
+                        <Icon icon={skill.icon} width="70" height="70" />
+                      </SkillCard>
+                    </SkillTooltip>
+                  ))}
+              </div>
+            </div>
+            <div className="border-t border-[#2a2d3d] my-2 opacity-60" />
+
+            {/* Controle de Versão */}
+            <div className="mb-2">
+              <h4 className="text-xl md:text-2xl font-bold mb-4 text-center bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-md tracking-wide">
+                Controle de Versão
+              </h4>
+              <div className="skills justify-center">
+                {skillsData.versionControl &&
+                  skillsData.versionControl.map((skill) => (
+                    <SkillTooltip key={skill.title} text={skill.text} url={skill.url}>
+                      <SkillCard title={skill.title}>
+                        <Icon icon={skill.icon} width="70" height="70" />
+                      </SkillCard>
+                    </SkillTooltip>
+                  ))}
               </div>
             </div>
           </div>
