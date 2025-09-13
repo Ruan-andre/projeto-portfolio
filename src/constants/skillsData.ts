@@ -101,7 +101,7 @@ export const skillsData = {
   platforms: [
     {
       title: "Node.js",
-      icon: "logos:nodejs",
+      icon: "logos:nodejs-icon-alt",
       text: "Node.js é um ambiente de execução JavaScript assíncrono e orientado a eventos, ideal para servidores escaláveis.",
       url: "https://nodejs.org/",
     },
