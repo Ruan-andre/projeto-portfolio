@@ -1,35 +1,58 @@
-"use client";
-import { urlReposGames, urlReposGamesFeatured } from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
-import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import { useState, useEffect } from "react";
-import { useSkeleton } from "@/context/SkeletonContext";
-import SkeletonProjects from "@/components/skeletons/projects";
 
-const Games = () => {
-  const [reposGames, setReposGames] = useState<GithubProjectsData[]>([]);
-  const [reposGamesFeatured, setReposGamesFeatured] = useState<GithubProjectsData[]>([]);
-  const { isLoading, setIsLoading } = useSkeleton();
+async function getProjectsData() {
+  // Para desenvolvimento, usar função server-side direta
+  if (process.env.NODE_ENV === "development") {
+    const { getDataRepo } = await import("@/functions/server");
+    const { urlReposGames, urlReposGamesFeatured } = await import("@/constants/urlsApiGithub");
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setReposGames(await getDataRepo(urlReposGames));
-        setReposGamesFeatured(await getDataRepo(urlReposGamesFeatured));
-      } catch (error) {
-        console.error("Erro ao buscar os projetos:", error);
-      } finally {
-        setIsLoading(false);
-      }
+    try {
+      const [reposGames, reposGamesFeatured] = await Promise.all([
+        getDataRepo(urlReposGames),
+        getDataRepo(urlReposGamesFeatured),
+      ]);
+
+      return { reposGames, reposGamesFeatured };
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      return { reposGames: [], reposGamesFeatured: [] };
+    }
+  }
+
+  // Para produção, usar API routes
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  try {
+    const [gamesRes, gamesFeaturedRes] = await Promise.all([
+      fetch(`${baseUrl}/api/projects?type=games`, {
+        next: { revalidate: 300 }, // Revalida a cada 5 minutos
+      }),
+      fetch(`${baseUrl}/api/projects?type=games-featured`, {
+        next: { revalidate: 300 },
+      }),
+    ]);
+
+    if (!gamesRes.ok || !gamesFeaturedRes.ok) {
+      console.error("Failed to fetch projects data");
+      return { reposGames: [], reposGamesFeatured: [] };
     }
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const [reposGames, reposGamesFeatured] = await Promise.all([gamesRes.json(), gamesFeaturedRes.json()]);
 
-  if (isLoading) return <SkeletonProjects />;
+    return {
+      reposGames: reposGames as GithubProjectsData[],
+      reposGamesFeatured: reposGamesFeatured as GithubProjectsData[],
+    };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return { reposGames: [], reposGamesFeatured: [] };
+  }
+}
+
+const Games = async () => {
+  const { reposGames, reposGamesFeatured } = await getProjectsData();
 
   return (
     <>

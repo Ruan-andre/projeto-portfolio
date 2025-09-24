@@ -57,8 +57,7 @@ export default function Home() {
       }
     }
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setIsLoading]);
 
   const professionalTitle = useTypingEffect(githubData?.bio || "", 100);
 
@@ -158,7 +157,7 @@ export default function Home() {
         <section id="skills" className="skills-container">
           <h3 className="home-title mb-[5rem]">Habilidades</h3>
           <div
-            className="w-full  mx-auto bg-[#181a20] border border-[#23263a] rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col gap-0"
+            className="w-full max-w-6xl mx-auto bg-[#181a20] border border-[#23263a] rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col gap-0"
             style={{ boxShadow: "0 0 32px 0 #1e293b55, 0 2px 32px 0 #38bdf855" }}
           >
             {/* Linguagens de Programação */}

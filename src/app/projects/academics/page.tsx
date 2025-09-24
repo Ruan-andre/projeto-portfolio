@@ -1,43 +1,67 @@
-"use client";
-
 import NoProjectsFound from "@/components/NoProjectsFound";
-import SkeletonProjects from "@/components/skeletons/projects";
-import { urlReposAcademics, urlReposAcademicsFeatured } from "@/constants/urlsApiGithub";
-import { useSkeleton } from "@/context/SkeletonContext";
-import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import { useEffect, useState } from "react";
 
-const Academics = () => {
-  const [reposAcademics, setReposAcademics] = useState<GithubProjectsData[]>([]);
-  const [reposAcademicsFeatured, setReposAcademicsFeatured] = useState<GithubProjectsData[]>([]);
-  const { isLoading, setIsLoading } = useSkeleton();
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setReposAcademics(await getDataRepo(urlReposAcademics));
-        setReposAcademicsFeatured(await getDataRepo(urlReposAcademicsFeatured));
-      } catch (error) {
-        console.error("Erro ao buscar os projetos:", error);
-      } finally {
-        setIsLoading(false);
-      }
+async function getProjectsData() {
+  // Para desenvolvimento, usar função server-side direta
+  if (process.env.NODE_ENV === "development") {
+    const { getDataRepo } = await import("@/functions/server");
+    const { urlReposAcademics, urlReposAcademicsFeatured } = await import("@/constants/urlsApiGithub");
+
+    try {
+      const [reposAcademics, reposAcademicsFeatured] = await Promise.all([
+        getDataRepo(urlReposAcademics),
+        getDataRepo(urlReposAcademicsFeatured),
+      ]);
+
+      return { reposAcademics, reposAcademicsFeatured };
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      return { reposAcademics: [], reposAcademicsFeatured: [] };
+    }
+  }
+
+  // Para produção, usar API routes
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  try {
+    const [academicsRes, academicsFeaturedRes] = await Promise.all([
+      fetch(`${baseUrl}/api/projects?type=academics`, {
+        next: { revalidate: 300 }, // Revalida a cada 5 minutos
+      }),
+      fetch(`${baseUrl}/api/projects?type=academics-featured`, {
+        next: { revalidate: 300 },
+      }),
+    ]);
+
+    if (!academicsRes.ok || !academicsFeaturedRes.ok) {
+      console.error("Failed to fetch projects data");
+      return { reposAcademics: [], reposAcademicsFeatured: [] };
     }
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const [reposAcademics, reposAcademicsFeatured] = await Promise.all([
+      academicsRes.json(),
+      academicsFeaturedRes.json(),
+    ]);
 
-  if (isLoading) {
-    return <SkeletonProjects />;
+    return {
+      reposAcademics: reposAcademics as GithubProjectsData[],
+      reposAcademicsFeatured: reposAcademicsFeatured as GithubProjectsData[],
+    };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return { reposAcademics: [], reposAcademicsFeatured: [] };
   }
+}
+
+const Academics = async () => {
+  const { reposAcademics, reposAcademicsFeatured } = await getProjectsData();
 
   return (
     <>
       {reposAcademics.length > 0 || reposAcademicsFeatured.length > 0 ? (
         <ProjectsCards
-          title="Projetos de Jogos"
+          title="Projetos Acadêmicos"
           items={reposAcademics}
           featuredItems={reposAcademicsFeatured}
         />

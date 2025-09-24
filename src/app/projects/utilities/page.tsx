@@ -1,30 +1,61 @@
-"use client";
-import { urlReposUtilities, urlReposUtilitiesFeatured } from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
-import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import { useState, useEffect } from "react";
-import { useSkeleton } from "@/context/SkeletonContext";
-import SkeletonProjects from "@/components/skeletons/projects";
 
-const Utilities = () => {
-  const [reposUtilities, setReposUtilities] = useState<GithubProjectsData[]>([]);
-  const [reposUtilitiesFeatured, setReposUtilitiesFeatured] = useState<GithubProjectsData[]>([]);
-  const { isLoading, setIsLoading } = useSkeleton();
+async function getProjectsData() {
+  // Para desenvolvimento, usar função server-side direta
+  if (process.env.NODE_ENV === "development") {
+    const { getDataRepo } = await import("@/functions/server");
+    const { urlReposUtilities, urlReposUtilitiesFeatured } = await import("@/constants/urlsApiGithub");
 
-  useEffect(() => {
-    async function fetchData() {
-      setReposUtilities(await getDataRepo(urlReposUtilities));
-      setReposUtilitiesFeatured(await getDataRepo(urlReposUtilitiesFeatured));
-      setIsLoading(false);
+    try {
+      const [reposUtilities, reposUtilitiesFeatured] = await Promise.all([
+        getDataRepo(urlReposUtilities),
+        getDataRepo(urlReposUtilitiesFeatured),
+      ]);
+
+      return { reposUtilities, reposUtilitiesFeatured };
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      return { reposUtilities: [], reposUtilitiesFeatured: [] };
+    }
+  }
+
+  // Para produção, usar API routes
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  try {
+    const [utilitiesRes, utilitiesFeaturedRes] = await Promise.all([
+      fetch(`${baseUrl}/api/projects?type=utilities`, {
+        next: { revalidate: 300 }, // Revalida a cada 5 minutos
+      }),
+      fetch(`${baseUrl}/api/projects?type=utilities-featured`, {
+        next: { revalidate: 300 },
+      }),
+    ]);
+
+    if (!utilitiesRes.ok || !utilitiesFeaturedRes.ok) {
+      console.error("Failed to fetch projects data");
+      return { reposUtilities: [], reposUtilitiesFeatured: [] };
     }
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const [reposUtilities, reposUtilitiesFeatured] = await Promise.all([
+      utilitiesRes.json(),
+      utilitiesFeaturedRes.json(),
+    ]);
 
-  if (isLoading) return <SkeletonProjects />;
+    return {
+      reposUtilities: reposUtilities as GithubProjectsData[],
+      reposUtilitiesFeatured: reposUtilitiesFeatured as GithubProjectsData[],
+    };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return { reposUtilities: [], reposUtilitiesFeatured: [] };
+  }
+}
+
+const Utilities = async () => {
+  const { reposUtilities, reposUtilitiesFeatured } = await getProjectsData();
 
   return (
     <>
@@ -38,4 +69,5 @@ const Utilities = () => {
     </>
   );
 };
+
 export default Utilities;

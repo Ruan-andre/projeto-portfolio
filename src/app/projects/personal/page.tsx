@@ -1,29 +1,61 @@
-"use client";
-import { urlReposPersonal, urlReposPersonalFeatured } from "@/constants/urlsApiGithub";
 import NoProjectsFound from "@/components/NoProjectsFound";
-import { getDataRepo } from "@/functions";
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import ProjectsCards from "@/widgets/ProjectsCards";
-import { useState, useEffect } from "react";
-import { useSkeleton } from "@/context/SkeletonContext";
-import SkeletonProjects from "@/components/skeletons/projects";
 
-const Personal = () => {
-  const [reposPersonal, setReposPersonal] = useState<GithubProjectsData[]>([]);
-  const [reposPersonalFeatured, setReposPersonalFeatured] = useState<GithubProjectsData[]>([]);
-  const { isLoading, setIsLoading } = useSkeleton();
+async function getProjectsData() {
+  // Para desenvolvimento, usar função server-side direta
+  if (process.env.NODE_ENV === "development") {
+    const { getDataRepo } = await import("@/functions/server");
+    const { urlReposPersonal, urlReposPersonalFeatured } = await import("@/constants/urlsApiGithub");
 
-  useEffect(() => {
-    async function fetchData() {
-      setReposPersonal(await getDataRepo(urlReposPersonal));
-      setReposPersonalFeatured(await getDataRepo(urlReposPersonalFeatured));
+    try {
+      const [reposPersonal, reposPersonalFeatured] = await Promise.all([
+        getDataRepo(urlReposPersonal),
+        getDataRepo(urlReposPersonalFeatured),
+      ]);
+
+      return { reposPersonal, reposPersonalFeatured };
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      return { reposPersonal: [], reposPersonalFeatured: [] };
     }
-    setIsLoading(false);
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }
 
-  if (isLoading) return <SkeletonProjects />;
+  // Para produção, usar API routes
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  try {
+    const [personalRes, personalFeaturedRes] = await Promise.all([
+      fetch(`${baseUrl}/api/projects?type=personal`, {
+        next: { revalidate: 300 }, // Revalida a cada 5 minutos
+      }),
+      fetch(`${baseUrl}/api/projects?type=personal-featured`, {
+        next: { revalidate: 300 },
+      }),
+    ]);
+
+    if (!personalRes.ok || !personalFeaturedRes.ok) {
+      console.error("Failed to fetch projects data");
+      return { reposPersonal: [], reposPersonalFeatured: [] };
+    }
+
+    const [reposPersonal, reposPersonalFeatured] = await Promise.all([
+      personalRes.json(),
+      personalFeaturedRes.json(),
+    ]);
+
+    return {
+      reposPersonal: reposPersonal as GithubProjectsData[],
+      reposPersonalFeatured: reposPersonalFeatured as GithubProjectsData[],
+    };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return { reposPersonal: [], reposPersonalFeatured: [] };
+  }
+}
+
+const Personal = async () => {
+  const { reposPersonal, reposPersonalFeatured } = await getProjectsData();
 
   return (
     <>
