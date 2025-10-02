@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { urlUserRepo } from "@/constants/urlsApiGithub";
-import fetchCache from "@/functions/cache/fetchCache";
+import fetchCacheServer from "@/functions/server/fetchCacheServer";
 import GithubData from "@/interfaces/GithubProfileData";
 
 export async function GET() {
   try {
-    const response = await fetchCache(urlUserRepo);
+    const response = await fetchCacheServer(urlUserRepo);
 
     const data: GithubData = {
       name: response.name,

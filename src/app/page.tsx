@@ -4,7 +4,6 @@
 import { Icon } from "../../public/assets/icons";
 import Image from "next/image";
 import GithubData from "@/interfaces/GithubProfileData";
-import { urlUserRepo } from "@/constants/urlsApiGithub";
 import { skillsData } from "@/constants/skillsData";
 import Link from "next/link";
 import { useSkeleton } from "@/context/SkeletonContext";
@@ -19,11 +18,10 @@ import GenericCarousel from "@/components/GenericCarousel";
 
 //HOOKS
 import useTypingEffect from "@/hooks/useTypingEffect";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 //FUNCTIONS
-import fetchCache from "@/functions/cache/fetchCache";
-import { GetDate } from "@/functions/";
+import { GetDate } from "@/utils/dateUtils";
 
 // IMAGES
 import imgGear from "../../public/assets/img/engrenagem.png";
@@ -36,19 +34,19 @@ export default function Home() {
   const [githubData, setGithubData] = useState<GithubData | null>(null);
   const { isLoading, setIsLoading } = useSkeleton();
 
+  const myAge = useMemo(() => GetDate(new Date("1997-09-18"), "Y", true), []);
+  const experienceYears = useMemo(() => GetDate(new Date("2020-01-01"), "Y", true), []);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetchCache(urlUserRepo);
+        const response = await fetch("/api/github-profile");
 
-        const data: GithubData = {
-          name: response.name,
-          picture: response.avatar_url,
-          bio: response.bio,
-          profileUrl: response.html_url,
-          email: response.email,
-        };
+        if (!response.ok) {
+          throw new Error("Falha ao buscar dados do perfil");
+        }
 
+        const data: GithubData = await response.json();
         setGithubData(data);
       } catch (error) {
         console.error("Erro ao buscar os dados do usuário", error);
@@ -89,13 +87,11 @@ export default function Home() {
             )}
 
             <p className="text-[2rem] text-[#a1a2a3] leading-[3.5rem] font-light">
-              Tenho {GetDate(new Date("1997-09-18"), "Y", true)} anos e atuo na área da tecnologia há{" "}
-              <span className="special-color opacity-100">
-                {GetDate(new Date("2020-01-01"), "Y", true)} anos.
-              </span>{" "}
-              Minha paixão pela programação começou quando iniciei a faculdade de Análise e Desenvolvimento de
-              Sistemas. Hoje, trabalho profissionalmente como Desenvolvedor Full Stack, mas admito que o
-              backend é minha verdadeira paixão.😂❤️
+              Tenho {myAge} anos e atuo na área da tecnologia há{" "}
+              <span className="special-color opacity-100">{experienceYears} anos.</span> Minha paixão pela
+              programação começou quando iniciei a faculdade de Análise e Desenvolvimento de Sistemas. Hoje,
+              trabalho profissionalmente como Desenvolvedor Full Stack, mas admito que o backend é minha
+              verdadeira paixão.😂❤️
               <br />
             </p>
           </div>

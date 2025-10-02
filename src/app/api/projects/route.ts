@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDataRepo } from "@/functions";
+import { getDataRepo } from "@/functions/server";
 import {
   urlReposGames,
   urlReposGamesFeatured,
