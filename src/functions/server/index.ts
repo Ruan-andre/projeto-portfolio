@@ -55,10 +55,11 @@ const GetDate = (initialDate: Date, type: "Y" | "M" | "D" | "FULL", birthDay?: b
 };
 
 const serverFetch = async (url: string) => {
+  
   try {
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
       },
       next: { revalidate: 300 }, // Cache por 5 minutos
