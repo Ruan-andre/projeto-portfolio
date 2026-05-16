@@ -2,13 +2,9 @@ import Skeleton from "react-loading-skeleton";
 
 const SkeletonProjects = () => {
   return (
-    <Skeleton
-      count={3}
-      width={500}
-      height={270}
-      style={{ marginBottom: "3rem", marginRight: "5px" }}
-      inline
-    />
+    <div className="h-[28rem] w-full rounded-[2rem] overflow-hidden">
+      <Skeleton height="100%" width="100%" />
+    </div>
   );
 };
 
