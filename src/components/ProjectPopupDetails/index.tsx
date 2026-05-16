@@ -10,6 +10,27 @@ const ProjectPopupDetails = () => {
   const { isOpen, modalData, closeModal } = useProjectsModal();
   const { t } = useLanguage();
 
+  // Função para transformar qualquer link do YouTube em um embed limpo
+  const getCleanYoutubeUrl = (url: string) => {
+    if (!url.includes("youtube.com") && !url.includes("youtu.be")) return url;
+
+    let videoId = "";
+    if (url.includes("v=")) {
+      videoId = url.split("v=")[1].split("&")[0];
+    } else if (url.includes("youtu.be/")) {
+      videoId = url.split("youtu.be/")[1].split("?")[0];
+    } else if (url.includes("embed/")) {
+      videoId = url.split("embed/")[1].split("?")[0];
+    } else if (url.includes("shorts/")) {
+      videoId = url.split("shorts/")[1].split("?")[0];
+    }
+
+    if (videoId) {
+      return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&iv_load_policy=3`;
+    }
+    return url;
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -30,18 +51,18 @@ const ProjectPopupDetails = () => {
 
   return (
     <div className={`modal-overlay ${isOpen ? "active" : ""}`} onClick={handleOverlayClick}>
-      <div className="modal-content !overflow-hidden flex flex-col p-0 shadow-[0_0_150px_rgba(140,249,255,0.1)]">
+      <div className="modal-content overflow-hidden! flex flex-col p-0 shadow-[0_0_150px_rgba(140,249,255,0.1)]">
         <button
           onClick={closeModal}
-          className="absolute top-4 right-6 md:top-10 md:right-10 z-[110] text-[4rem] md:text-[5rem] text-gray-500 hover:text-red-500 transition-all font-light leading-none"
+          className="absolute top-4 right-6 md:top-10 md:right-10 z-110 text-[4rem] md:text-[5rem] text-gray-500 hover:text-red-500 transition-all font-light leading-none"
         >
           &times;
         </button>
 
         <div className="overflow-y-auto p-8 md:p-10 flex flex-col gap-8 md:gap-10">
-          <div className="video-container !w-full max-w-[40rem] md:max-w-[65rem] !pb-[42%] shadow-2xl border border-white/5">
+          <div className="video-container w-full! max-w-160 md:max-w-260 pb-[42%]! shadow-2xl border border-white/5">
             <iframe
-              src={modalData.urlVideo}
+              src={getCleanYoutubeUrl(modalData.urlVideo ?? "")}
               allowFullScreen
               title={modalData.name}
               className="rounded-[1.6rem]"
