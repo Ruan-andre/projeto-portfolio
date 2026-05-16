@@ -11,20 +11,47 @@ const SkillTooltip = ({ text, url, children }: { text: string; url?: string; chi
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
-    setTimeout(() => {
+    const nextClickedState = !isClicked;
+
+    if (nextClickedState) {
+      // Fecha todos os outros tooltips antes de abrir este
+      window.dispatchEvent(new CustomEvent("close-all-tooltips", { detail: containerRef.current }));
+      setIsShowing(true);
+      setIsClicked(true);
+
+      setTimeout(() => {
+        setIsShowing(false);
+        setIsClicked(false);
+      }, 5000);
+    } else {
       setIsShowing(false);
       setIsClicked(false);
-    }, 5000);
+    }
   };
 
   const handleHover = (hover: boolean) => {
     if (!isClicked && hover) {
+      // Notifica os outros tooltips para fecharem antes de abrir este
+      window.dispatchEvent(new CustomEvent("close-all-tooltips", { detail: containerRef.current }));
       setIsShowing(true);
     } else if (!isClicked && !hover) {
       setIsShowing(false);
     }
   };
+
+  const handleCloseAll = (e: Event) => {
+    const customEvent = e as CustomEvent<HTMLDivElement | null>;
+    // Se o evento vier de outro componente, fecha este
+    if (customEvent.detail !== containerRef.current) {
+      setIsShowing(false);
+      setIsClicked(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("close-all-tooltips", handleCloseAll);
+    return () => window.removeEventListener("close-all-tooltips", handleCloseAll);
+  }, []);
 
   useEffect(() => {
     if (isShowing && tooltipRef.current && containerRef.current) {
@@ -43,13 +70,9 @@ const SkillTooltip = ({ text, url, children }: { text: string; url?: string; chi
   return (
     <div
       ref={containerRef}
-      className="relative flex justify-center items-center"
-      onMouseEnter={() => {
-        handleHover(true);
-      }}
-      onMouseLeave={() => {
-        handleHover(false);
-      }}
+      className="relative flex items-center w-fit"
+      onMouseEnter={() => handleHover(true)}
+      onMouseLeave={() => handleHover(false)}
       onClick={handleClick}
     >
       {children}
@@ -61,16 +84,22 @@ const SkillTooltip = ({ text, url, children }: { text: string; url?: string; chi
           exit={{ opacity: 0, x: position === "right" ? 10 : -10 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className={`tooltip ${position === "right" ? "tooltip-right" : "tooltip-left"}`}
+          style={{ zIndex: 100 }}
         >
-          <small className="text-amber-700 text-[1.2rem] block">
-            (Clique para fixar o popup temporariamente)
+          <small className="hidden md:block text-amber-700 text-[1.2rem] mb-2 font-bold uppercase tracking-wider">
+            (Clique para fixar o popup)
           </small>
-          {text}
+          <p>{text}</p>
           {url && (
-            <p className="text-[1.5rem]">
-              Você pode ver mais em:{" "}
-              <a className="text-blue-500" href={url} target="_blank">
-                {url}
+            <p className="mt-4 pt-3 border-t border-gray-200 text-[1.4rem]">
+              Ver documentação:{" "}
+              <a
+                className="text-blue-600 font-bold underline"
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Link Oficial
               </a>
             </p>
           )}
