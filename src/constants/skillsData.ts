@@ -50,6 +50,12 @@ export const skillsData = {
       text: "Entity Framework Core é um ORM moderno para .NET, facilitando a comunicação entre aplicações e bancos de dados.",
       url: "https://learn.microsoft.com/pt-br/ef/core/",
     },
+    {
+      title: "Camunda BPM",
+      icon: "simple-icons:camunda",
+      text: "Camunda é uma plataforma de automação de processos e orquestração de fluxos de trabalho baseada em BPMN.",
+      url: "https://camunda.com/",
+    },
   ],
   frontend: [
     {
@@ -96,6 +102,12 @@ export const skillsData = {
       text: "SQLite é um banco de dados relacional leve e embutido, amplamente usado em aplicações locais e móveis.",
       url: "https://www.sqlite.org/",
     },
+    {
+      title: "Elasticsearch",
+      icon: "vscode-icons:file-type-elastic",
+      text: "Elasticsearch é um motor de busca e análise distribuído, ideal para lidar com grandes volumes de dados em tempo real.",
+      url: "https://www.elastic.co/pt/elasticsearch/",
+    },
   ],
 
   platforms: [
@@ -104,6 +116,12 @@ export const skillsData = {
       icon: "logos:nodejs-icon-alt",
       text: "Node.js é um ambiente de execução JavaScript assíncrono e orientado a eventos, ideal para servidores escaláveis.",
       url: "https://nodejs.org/",
+    },
+    {
+      title: "Docker",
+      icon: "logos:docker-icon",
+      text: "Docker é uma plataforma que permite criar, testar e implantar aplicações rapidamente em containers isolados.",
+      url: "https://www.docker.com/",
     },
   ],
   versionControl: [
