@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer id="contacts" className="py-[9.6rem] text-center bg-dark">
       <div className="max-w-[128rem] mx-auto px-6">
-        <h2 className="text-[3.6rem] sm:text-[5rem] font-black mb-[6.4rem] uppercase tracking-tighter text-white">
+        <h2 className="text-[3.6rem] sm:text-[5rem] mb-[6.4rem] uppercase tracking-tighter text-white">
           {t("Contatos", "Contacts")}
         </h2>
 
