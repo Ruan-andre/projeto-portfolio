@@ -1,45 +1,56 @@
 @layer components {
-  /* Container principal */
+  /* Container principal - Mudando para Split Layout no desktop */
   .hero-container {
-    @apply min-h-[90vh] flex flex-col items-center justify-center px-[2.4rem] pt-[12rem] md:pt-[6.4rem] text-center;
+    @apply min-h-[85vh] flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 px-[2.4rem] pt-[12rem] md:pt-[6.4rem] max-w-[120rem] mx-auto text-center md:text-left;
   }
 
-  /* Wrapper da foto de perfil */
+  /* Bloco de Texto (Esquerda) */
+  .hero-text-content {
+    @apply flex-1 flex flex-col items-center md:items-start order-2 md:order-1;
+  }
+
+  /* Bloco da Imagem (Direita) */
   .hero-profile-wrapper {
-    @apply relative mb-[3.2rem] md:mb-[4rem];
+    @apply relative mb-[3.2rem] md:mb-0 order-1 md:order-2 shrink-0;
   }
 
-  /* Efeito de brilho (Glow) atrás da foto */
   .hero-profile-glow {
     @apply absolute -inset-[1.2rem] bg-special rounded-full blur-[1.2rem] opacity-10 transition duration-1000;
   }
-  
+
   .hero-profile-wrapper:hover .hero-profile-glow {
     @apply opacity-30;
   }
 
-  /* Imagem de perfil */
   .hero-profile-image {
-    @apply relative w-[20rem] h-[20rem] md:w-[32rem] md:h-[32rem] rounded-full border-[0.4rem] border-card object-cover hover:border-special transition-all duration-700 shadow-2xl;
+    @apply relative w-[25rem] h-[25rem] md:w-[45rem] md:h-[45rem] rounded-full border-[0.4rem] border-card object-cover hover:border-special transition-all duration-700 shadow-2xl;
   }
 
-  /* Título principal (H1) */
+  /* Título principal (H1) - Menor conforme solicitado */
   .hero-title {
-    @apply text-[3.6rem] sm:text-[4.8rem] md:text-[7.2rem] font-bold mb-[2.4rem] tracking-tight leading-tight;
+    @apply text-[3.2rem] sm:text-[4rem] md:text-[5.6rem] font-bold mb-[1.6rem] tracking-tight leading-tight text-white;
   }
 
-  /* Container do subtítulo (efeito de digitação) */
+  /* Container do subtítulo */
   .hero-subtitle-wrapper {
-    @apply h-[4rem] mb-[3.2rem] flex items-center justify-center;
+    @apply h-[3.2rem] mb-[2.4rem] flex items-center justify-center md:justify-start;
   }
 
-  /* Subtítulo (H2) */
   .hero-subtitle {
-    @apply text-[2.4rem] md:text-[3rem] text-gray-300 font-medium;
+    @apply text-[2rem] md:text-[2.6rem] text-gray-300 font-medium;
   }
 
-  /* Parágrafo de descrição */
+  /* Descrição */
   .hero-description {
-    @apply max-w-[85rem] text-[#a1a2a3] text-[2rem] md:text-[2.4rem] mb-[4.8rem] leading-relaxed font-light;
+    @apply max-w-[65rem] text-[#a1a2a3] text-[1.8rem] md:text-[2rem] mb-[4rem] leading-relaxed font-light;
+  }
+
+  /* Botão Download CV - Estilo Moderno */
+  .btn-download-cv {
+    @apply flex items-center gap-4 bg-white/5 border border-white/10 px-10 py-5 rounded-full font-black uppercase text-[1.3rem] tracking-[0.2rem] text-white hover:border-special hover:text-special hover:bg-special/5 transition-all shadow-xl;
+  }
+
+  .btn-download-cv-icon {
+    @apply text-[2.2rem] transition-transform;
   }
 }
