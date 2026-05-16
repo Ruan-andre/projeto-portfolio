@@ -4,14 +4,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import GenericPopupContextType from "../interfaces/GenericPopupContextType";
 import GenericPopupMessageData from "@/interfaces/GenericPopupMessageData";
 
-const GenericModalContext = createContext<GenericPopupContextType | undefined>(
-  undefined
-);
-export const GenericPopupMessageProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const GenericModalContext = createContext<GenericPopupContextType | undefined>(undefined);
+export const GenericPopupMessageProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState<GenericPopupMessageData>({
     btnCloseClassColor: "",
@@ -43,9 +37,7 @@ export const GenericPopupMessageProvider = ({
   }, [isOpen]);
 
   return (
-    <GenericModalContext.Provider
-      value={{ isOpen, modalData, openModal, closeModal }}
-    >
+    <GenericModalContext.Provider value={{ isOpen, modalData, openModal, closeModal }}>
       {children}
     </GenericModalContext.Provider>
   );

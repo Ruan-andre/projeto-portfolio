@@ -1,25 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDataRepo } from "@/functions/server";
-import {
-  urlReposGames,
-  urlReposGamesFeatured,
-  urlReposPersonal,
-  urlReposPersonalFeatured,
-  urlReposUtilities,
-  urlReposUtilitiesFeatured,
-  urlReposAcademics,
-  urlReposAcademicsFeatured,
-} from "@/constants/urlsApiGithub";
+import { urlAllRepos, urlReposFeatured } from "@/constants/urlsApiGithub";
 
 const urlMappings = {
-  games: urlReposGames,
-  "games-featured": urlReposGamesFeatured,
-  personal: urlReposPersonal,
-  "personal-featured": urlReposPersonalFeatured,
-  utilities: urlReposUtilities,
-  "utilities-featured": urlReposUtilitiesFeatured,
-  academics: urlReposAcademics,
-  "academics-featured": urlReposAcademicsFeatured,
+  featured: urlReposFeatured,
+  all: urlAllRepos,
 };
 
 export async function GET(request: NextRequest) {

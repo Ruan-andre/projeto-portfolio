@@ -1,25 +1,34 @@
 import { useEffect, useState } from "react";
 
-const useTypingEffect = (text: string = "", speed: number) => {
+const useTypingEffect = (phrases: string[] | string, speed: number = 100) => {
   const [displayedText, setDisplayedText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!text.trim()) {
-      setDisplayedText("");
-      return;
-    }
+    const currentPhrases = Array.isArray(phrases) ? phrases : [phrases];
+    const currentPhrase = currentPhrases[phraseIndex];
 
-    let index = 0;
-    setDisplayedText("");
+    const timer = setTimeout(() => {
+      if (isDeleting) {
+        setDisplayedText(currentPhrase.substring(0, charIndex - 1));
+        setCharIndex((prev) => prev - 1);
+      } else {
+        setDisplayedText(currentPhrase.substring(0, charIndex + 1));
+        setCharIndex((prev) => prev + 1);
+      }
 
-    const interval = setInterval(() => {
-      setDisplayedText(text.slice(0, index + 1));
-      index++;
-      if (index >= text.length) clearInterval(interval);
-    }, speed);
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && charIndex === 0) {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % currentPhrases.length);
+      }
+    }, isDeleting ? speed / 2 : speed);
 
-    return () => clearInterval(interval);
-  }, [text, speed]);
+    return () => clearTimeout(timer);
+  }, [phrases, phraseIndex, charIndex, isDeleting, speed]);
 
   return displayedText;
 };

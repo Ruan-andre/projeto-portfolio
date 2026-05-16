@@ -3,40 +3,50 @@
 import { useSkeleton } from "@/context/SkeletonContext";
 import ContactCard from "../ContactCard";
 import SkeletonFooter from "../skeletons/footer";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
   const { isLoading } = useSkeleton();
+  const { t } = useLanguage();
 
   if (isLoading) {
     return <SkeletonFooter />;
   }
 
   return (
-    <footer className="relative bg-background w-full mt-[10rem] top-[100%]">
-      <h3 className="text-[4rem] pb-[4rem] pr-[7rem] max-sm:pr-0 font-semibold text-center">Contatos</h3>
-      <section id="contacts" className="col-span-4 flex flex-col">
-        <div className="contacts bg-shadow-brown-red">
+    <footer id="contacts" className="py-[9.6rem] text-center bg-dark">
+      <div className="max-w-[128rem] mx-auto px-6">
+        <h2 className="text-[3.6rem] sm:text-[5rem] font-black mb-[6.4rem] uppercase tracking-tighter text-white">
+          {t("Contatos", "Contacts")}
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[3.2rem] mb-[9.6rem]">
           <ContactCard
-            href="https://github.com/ruan-andre"
             iconName="mdi:github"
-            title="Github"
+            title="GitHub"
             info="@ruan-andre"
+            href="https://github.com/Ruan-andre"
           />
           <ContactCard
+            iconName="mdi:linkedin"
+            title="LinkedIn"
+            info="André Ruan"
             href="https://www.linkedin.com/in/andr%C3%A9-ruan-554854250/"
-            iconName="devicon:linkedin"
-            title="Linkedin"
           />
           <ContactCard iconName="logos:google-gmail" title="E-mail" info="ruan.fullstack@gmail.com" />
           <ContactCard
             iconName="skill-icons:discord"
-            href="https://discordapp.com/users/798981432113365043"
             title="Discord"
             info="ruan.andre97"
+            href="https://discordapp.com/users/798981432113365043"
           />
         </div>
-      </section>
-      <p className="text-[1.6rem] text-center mb-[2rem] mt-[2rem]">© André Ruan | 2025</p>
+
+        <p className="text-[1.6rem] text-gray-600 font-medium">
+          &copy; {new Date().getFullYear()} André Ruan.{" "}
+          {t("Todos os direitos reservados.", "All rights reserved.")}
+        </p>
+      </div>
     </footer>
   );
 };

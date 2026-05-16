@@ -8,7 +8,12 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+import { LanguageProvider } from "@/context/LanguageContext";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Portfólio | André Ruan - Desenvolvedor Full Stack",
@@ -18,17 +23,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <GenericPopupMessageProvider>
-        <SkeletonTheme baseColor="#202020" highlightColor="#444">
-          <SkeletonProvider>
-            <body className={`${inter.className} relative min-h-screen pt-[3rem]`}>
-              {children}
-              <GenericPopupMessage />
-              <Footer />
-            </body>
-          </SkeletonProvider>
-        </SkeletonTheme>
-      </GenericPopupMessageProvider>
+      <LanguageProvider>
+        <GenericPopupMessageProvider>
+          <SkeletonTheme baseColor="#202020" highlightColor="#444">
+            <SkeletonProvider>
+              <body className={`${inter.className} antialiased`}>
+                {children}
+                <GenericPopupMessage />
+                <Footer />
+              </body>
+            </SkeletonProvider>
+          </SkeletonTheme>
+        </GenericPopupMessageProvider>
+      </LanguageProvider>
     </html>
   );
 }

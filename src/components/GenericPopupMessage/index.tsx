@@ -25,7 +25,7 @@ const GenericPopupMessage = () => {
 
   return (
     <div
-      className={`fixed top-[7rem] right-[2rem] w-[25rem] h-[10rem] max-w-[25rem] max-h-[10rem] text-[1.8rem] p-4 rounded-lg shadow-lg flex items-center justify-center bg-green-500/90 transition-all duration-300 transform ${
+      className={`fixed top-[12rem] md:top-[7rem] right-[2rem] w-[25rem] h-[10rem] max-w-[25rem] max-h-[10rem] text-[1.8rem] p-4 rounded-lg shadow-lg flex items-center justify-center bg-green-500/90 transition-all duration-300 transform ${
         isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
       } ${modalData?.bgClassColor || ""} ${modalData?.textClassColor || ""}`}
     >

@@ -1,24 +1,24 @@
 "use client";
 
-import { Icon } from "../../../public/assets/icons";
+import { Icon } from "@iconify/react";
 import ContactCardProps from "@/interfaces/ContactCardProps";
-import Link from "next/link";
 import { useGenericModal } from "@/context/GenericPopupMessageContext";
+import { useLanguage } from "@/context/LanguageContext";
 
-const ContactCard = ({ iconName, title, info, href, iconSize }: ContactCardProps) => {
+const ContactCard = ({ iconName, title, info, href }: ContactCardProps) => {
   const { openModal } = useGenericModal();
+  const { t } = useLanguage();
 
   const handleClick = async (e: React.MouseEvent) => {
     if (info && !href) {
       e.preventDefault();
       try {
-        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
         const isEmail = title.toLowerCase().includes("e-mail") || title.toLowerCase().includes("email");
-        if (isMobile && isEmail) {
-          window.location.href = `mailto:${info}`;
-        } else if (isEmail) {
+        if (isEmail) {
           await navigator.clipboard.writeText(info);
-          openModal({ content: <h1>Texto copiado!</h1> });
+          openModal({
+            content: t("E-mail copiado!", "Email copied!"),
+          });
         }
       } catch (err) {
         console.error("Falha ao copiar:", err);
@@ -26,17 +26,30 @@ const ContactCard = ({ iconName, title, info, href, iconSize }: ContactCardProps
     }
   };
 
+  const Content = (
+    <div className="flex flex-col items-center gap-[2rem] p-[4rem] bg-card/50 rounded-[4rem] border border-border hover:border-special transition-all group w-full h-full cursor-pointer shadow-xl">
+      <Icon
+        icon={iconName}
+        className="text-[6rem] text-gray-600 group-hover:text-special transition-colors"
+      />
+      <span className="text-[2.4rem] font-medium uppercase tracking-tight text-white group-hover:text-special transition-colors">
+        {title}
+      </span>
+    </div>
+  );
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="w-full">
+        {Content}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href || "#contacts"}
-      target={href ? "_blank" : ""}
-      className="flex flex-col items-center min-h-[9rem] justify-between gap-2.5 hover-transform-scale"
-      onClick={handleClick}
-    >
-      <Icon icon={iconName} width={iconSize || 35} height={iconSize || 35} />
-      <p className="text-[2rem]">{title}</p>
-      {info && <p className="text-[1.5rem]">{info}</p>}
-    </Link>
+    <div onClick={handleClick} className="w-full">
+      {Content}
+    </div>
   );
 };
 
