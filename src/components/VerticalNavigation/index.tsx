@@ -1,45 +1,40 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Link from "next/link";
+"use client";
 import React, { useState } from "react";
-import "./verticalNavigation.css";
-import { Icon } from "../../../public/assets/icons";
+import { Icon } from "@iconify/react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const VerticalNavigation = (props: React.PropsWithChildren<{}>) => {
+const VerticalNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navItems = [
+    { href: "#presentation", icon: "ic:round-home", title: t("Início", "Home") },
+    { href: "#projects", icon: "fluent:tabs-16-filled", title: t("Projetos", "Projects") },
+    { href: "#skills", icon: "fa6-solid:code", title: t("Habilidades", "Skills") },
+    { href: "#contacts", icon: "uiw:mail", title: t("Contato", "Contact") },
+  ];
 
   return (
-    <header className="fixed z-10 left-25 top-30">
-      <button className="btn-hamburguer" onClick={() => setIsOpen(!isOpen)}>
-        <Icon icon="ci:menu-alt-01" width={70} height={70} />
+    <>
+      <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
+        <Icon icon={isOpen ? "ph:x-bold" : "ph:list-bold"} width="24" height="24" />
       </button>
 
-      <nav
-        className={`bg-black/45 border border-white/10 rounded-[80px] backdrop-blur-lg shadow-lg shadow-black/20 ${
-          isOpen ? "block" : "hidden"
-        } md:block`}
-      >
-        <ul className="flex flex-col gap-15 p-5">
-          {React.Children.map(props.children, (item, index) => {
-            const href = (item as any).props.href || "#";
-            const dataTitle = (item as any).props["data-title"] || "";
-            return (
-              <li
-                data-title={dataTitle}
-                className="item personalized-title"
-                key={index}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <Link className="flex flex-col justify-center items-center" href={href}>
-                  {" "}
-                  {item} <span className="text-white text-2xl hidden max-md:block">{dataTitle}</span>
-                </Link>
+      <aside className={`vertical-nav ${isOpen ? "is-open" : ""}`}>
+        <nav className="nav-wrapper">
+          <ul className="flex flex-col gap-8">
+            {navItems.map((item) => (
+              <li key={item.href} className="nav-item-container">
+                <a href={item.href} className="nav-link" onClick={() => setIsOpen(false)}>
+                  <Icon icon={item.icon} width="32" height="32" />
+                  <span className="nav-tooltip">{item.title}</span>
+                </a>
               </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </header>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </>
   );
 };
 

@@ -1,60 +1,70 @@
-@import "tailwindcss";
-
-.item {
-  @apply opacity-45 duration-300;
-}
-
-.item:hover {
-  @apply scale-125 opacity-100 transition-transform;
-}
-
-.btn-hamburguer {
-  @apply hidden fixed top-5 left-5 z-20 p-2 bg-black/30 rounded-full backdrop-blur-lg shadow-lg shadow-black;
-}
-
-@media (max-width: 1300px) {
-  .btn-hamburguer {
-    display: block;
-  }
-  nav {
-    @apply fixed top-0 left-0 w-[10rem] h-full bg-black/90 border-none rounded-none shadow-none;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
+@layer components {
+  /* Botão do menu mobile */
+  .mobile-menu-btn {
+    @apply fixed top-8 left-8 z-[60] md:hidden p-3 bg-black/40 border border-white/10 rounded-full backdrop-blur-lg shadow-2xl text-white;
   }
 
-  nav.block {
-    transform: translateX(0);
+  /* Container lateral (Aside) */
+  .vertical-nav {
+    @apply fixed left-8 top-1/2 -translate-y-1/2 z-50 transition-all duration-300;
   }
 
-  ul {
-    @apply flex flex-col items-start justify-center h-full pl-5;
+  /* Wrapper interno do menu (Nav) */
+  .nav-wrapper {
+    @apply bg-black/40 border border-white/10 rounded-full backdrop-blur-lg p-4 shadow-2xl;
   }
-}
 
-@media (max-width: 768px) {
-  .item {
+  /* Item da lista (Li) */
+  .nav-item-container {
+    @apply relative;
+  }
+
+  /* Link e seus estados */
+  .nav-link {
+    @apply flex items-center justify-start md:justify-center p-3 rounded-full text-gray-400 hover:text-special hover:bg-white/5 transition-all duration-300;
+  }
+
+  /* Tooltip de texto */
+  .nav-tooltip {
+    @apply absolute left-[130%] top-1/2 -translate-y-1/2 px-[1.2rem] py-[0.5rem] rounded-[0.6rem] text-[1.4rem] whitespace-nowrap opacity-0 pointer-events-none transition-opacity duration-300 z-[100] shadow-2xl;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: #fff;
+  }
+
+  .nav-link:hover .nav-tooltip {
     @apply opacity-100;
   }
 
-  .item:hover {
-    @apply scale-125;
-  }
+  /* Sobrescritas para o Mobile */
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      @apply top-6 left-6;
+    }
 
-  .btn-hamburguer {
-    display: inherit;
-  }
+    .vertical-nav {
+      @apply left-0 top-0 translate-y-0 h-full w-full flex items-center justify-center bg-black/95 backdrop-blur-xl -translate-x-[200%] transition-transform duration-500;
+    }
+    
+    .vertical-nav.is-open {
+      @apply translate-x-0;
+    }
 
-  nav {
-    @apply fixed top-0 left-0 w-full h-full bg-black/90 border-none rounded-none shadow-none;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
+    .nav-wrapper {
+      @apply border-none bg-transparent shadow-none p-0 w-full max-w-[32rem] mx-auto;
+    }
 
-  nav.block {
-    transform: translateX(0);
-  }
+    .nav-tooltip {
+      @apply static opacity-100 pointer-events-auto block border-none bg-transparent p-0 shadow-none flex-1 text-left leading-none;
+      transform: none;
+    }
 
-  ul {
-    @apply flex flex-col items-start max-md:items-center max-md:justify-center justify-center h-full pl-5;
+    .nav-link {
+      @apply gap-8 text-[2.8rem] font-black uppercase tracking-widest w-full items-center leading-none;
+    }
+    
+    .nav-link .iconify {
+      @apply w-[4rem] h-[4rem] shrink-0 block;
+    }
   }
 }
