@@ -7,13 +7,15 @@ import profilePicture from "../../../public/assets/img/profile-picture.jpg";
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import GithubData from "@/interfaces/GithubProfileData";
 
 interface HeroProps {
   myAge: string | number;
   experienceYears: string | number;
+  githubData: GithubData;
 }
 
-const Hero = ({ myAge, experienceYears }: HeroProps) => {
+const Hero = ({ myAge, experienceYears, githubData }: HeroProps) => {
   const { language, t } = useLanguage();
 
   const phrasesPT = ["Desenvolvedor Full Stack", "Apaixonado por Back-end", "Focado em Performance"];
@@ -26,7 +28,7 @@ const Hero = ({ myAge, experienceYears }: HeroProps) => {
       <div className="hero-text-content">
         <h1 className="hero-title">
           {t("Olá, eu sou", "Hello, I am")}{" "}
-          <span className="text-special tracking-widest uppercase block md:inline">André Ruan!</span>
+          <span className="text-special tracking-widest uppercase block md:inline">{githubData.name}!</span>
         </h1>
 
         <div className="hero-subtitle-wrapper">
@@ -71,14 +73,7 @@ const Hero = ({ myAge, experienceYears }: HeroProps) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src={profilePicture}
-            width={undefined}
-            height={undefined}
-            alt="André Ruan"
-            className="hero-profile-image"
-            priority
-          />
+          <Image src={profilePicture} alt="André Ruan" className="hero-profile-image" priority />
         </a>
       </div>
     </header>

@@ -19,10 +19,18 @@ import Expertise from "@/components/Expertise";
 // TYPES & UTILS
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
 import { GetDate } from "@/utils/dateUtils";
+import GithubData from "@/interfaces/GithubProfileData";
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<GithubProjectsData[]>([]);
   const [allProjects, setAllProjects] = useState<GithubProjectsData[]>([]);
+  const [githubData, setGithubData] = useState<GithubData>({
+    name: "",
+    picture: "",
+    bio: "",
+    profileUrl: "",
+    email: "",
+  });
 
   const { isLoading, setIsLoading } = useSkeleton();
 
@@ -34,10 +42,16 @@ export default function Home() {
       try {
         const featuredPromises = fetch(`/api/projects?type=featured`).then((res) => res.json());
         const allPromises = fetch(`/api/projects?type=all`).then((res) => res.json());
+        const githubProfilePromise = fetch(`/api/github-profile`).then((res) => res.json());
 
-        const [featResults, allResults] = await Promise.all([featuredPromises, allPromises]);
+        const [featResults, allResults, githubProfile] = await Promise.all([
+          featuredPromises,
+          allPromises,
+          githubProfilePromise,
+        ]);
         setAllProjects(allResults);
         setFeaturedProjects(featResults);
+        setGithubData(githubProfile);
       } catch (error) {
         console.error("Erro ao buscar dados", error);
       } finally {
@@ -55,7 +69,7 @@ export default function Home() {
       <VerticalNavigation />
 
       <main>
-        <Hero myAge={myAge} experienceYears={experienceYears} />
+        <Hero myAge={myAge} experienceYears={experienceYears} githubData={githubData} />
 
         <ProjectsSection featuredProjects={featuredProjects} allProjects={allProjects} />
 
