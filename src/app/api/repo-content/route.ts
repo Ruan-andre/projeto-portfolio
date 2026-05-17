@@ -17,7 +17,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Content not found" }, { status: 404 });
     }
 
-    // Se tem tecnologias, processá-las
     let technologies: Technologies[] = [];
     if (jsonContent.technologies) {
       technologies = getTechnologies(jsonContent.technologies) as Technologies[];

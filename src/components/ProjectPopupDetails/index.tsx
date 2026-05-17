@@ -10,7 +10,6 @@ const ProjectPopupDetails = () => {
   const { isOpen, modalData, closeModal } = useProjectsModal();
   const { t } = useLanguage();
 
-  // Função para transformar qualquer link do YouTube em um embed limpo
   const getCleanYoutubeUrl = (url: string) => {
     if (!url.includes("youtube.com") && !url.includes("youtu.be")) return url;
 
