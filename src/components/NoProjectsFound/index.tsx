@@ -1,7 +1,10 @@
+import { useLanguage } from "@/context/LanguageContext";
+
 const NoProjectsFound = () => {
+  const { t } = useLanguage();
   return (
-    <div className="container-center-full">
-      <p className="text-center">Sem projetos, por enquanto...</p>
+    <div className="container-center-full text-3xl">
+      <p className="text-center">{t("SEM PROJETOS, POR ENQUANTO...", "NO PROJECTS FOUND, FOR NOW...")}</p>
     </div>
   );
 };
