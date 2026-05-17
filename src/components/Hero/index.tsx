@@ -71,7 +71,14 @@ const Hero = ({ myAge, experienceYears }: HeroProps) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={profilePicture} alt="André Ruan" className="hero-profile-image" priority />
+          <Image
+            src={profilePicture}
+            width={undefined}
+            height={undefined}
+            alt="André Ruan"
+            className="hero-profile-image"
+            priority
+          />
         </a>
       </div>
     </header>
