@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 type Language = "pt" | "en";
 
@@ -13,7 +13,8 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("pt");
+  const userNavivationLanguage = navigator.language;
+  const [language, setLanguage] = useState<Language>(userNavivationLanguage === "pt-BR" ? "pt" : "en");
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "pt" ? "en" : "pt"));
@@ -24,9 +25,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>{children}</LanguageContext.Provider>
   );
 };
 
