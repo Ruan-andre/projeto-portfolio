@@ -18,8 +18,8 @@ import Expertise from "@/components/Expertise";
 
 // TYPES & UTILS
 import GithubProjectsData from "@/interfaces/GithubProjectsData";
-import { GetDate } from "@/utils/dateUtils";
 import GithubData from "@/interfaces/GithubProfileData";
+import { GetDate } from "@/functions/server";
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<GithubProjectsData[]>([]);
