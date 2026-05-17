@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <GenericPopupMessageProvider>
           <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <SkeletonProvider>
-              <body className={`${inter.className} antialiased`}>
+              <body suppressHydrationWarning className={`${inter.className} antialiased`}>
                 {children}
                 <GenericPopupMessage />
                 <Footer />
